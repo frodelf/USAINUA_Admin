@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/adminLte/css/adminlte.css"/>
+
+</head>
+
+<body>
+<header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
+
+<div class="content-wrapper" style="min-height: 638.367px;">
+
+    <center>
+        <form method="post" th:action="@{/admin/product/edit/{id}(id=${product.id})}" enctype="multipart/form-data">
+            Ім'я <input class="form-control" th:value="${product.name}" type="text" name="name" placeholder="ім'я"
+                        style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
+            Ціна <input class="form-control" th:value="${product.price}" type="text" name="price" placeholder="ціна"
+                        style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
+            Посилання <input class="form-control" th:value="${product.link}" type="text" name="link"
+                             placeholder="Посилання" style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
+            <div class="form-group" style="width: 40%">
+                <label for="type">Type:</label>
+                <select class="form-control" id="type" name="type">
+                    <option th:each="type : ${types}" th:value="${type}" th:text="${type}"></option>
+                </select>
+            </div>
+
+            <button type="button" class="btn btn-secondary" style="margin-top: 25px">
+                <label for="fileInput" style="cursor: pointer;">
+                    <i class="fa fa-file-image-o" aria-hidden="true"></i> Додати фото
+                </label>
+            </button>
+            <br/>
+            <input id="fileInput" type="file" style="display:none;" name="image">
+            <img id="selectedImage" src="" alt="Вибране зображення"
+                 style="width: 150px; height: 90px; margin-top: 15px">
+            <br/>
+            <script>
+                document.querySelector('#fileInput').addEventListener('change', (event) => {
+                    const file = event.target.files[0];
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        document.querySelector('#selectedImage').setAttribute('src', reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            </script>
+            <button type="submit" class="btn btn-secondary">
+                Зберегти
+            </button>
+        </form>
+    </center>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

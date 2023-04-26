@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/adminLte/css/adminlte.css"/>
+
+</head>
+
+<body>
+<header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
+<div class="content-wrapper" style="min-height: 638.367px;">
+
+    <center><h2 th:text="${order_type}"></h2></center>
+    <div class="row">
+        <div class="col-sm-7 bg-light p-3 border">
+            <h6 th:text="${'id: '+order.getId()}"></h6>
+            <h6 th:text="${'Статус: '+order.getStatus()}"></h6>
+            <h6 th:text="${'Транспорт: '+order.getTransport()}"></h6>
+            <h6 th:text="${'Вага: '+order.getWeight()}"></h6>
+            <h6 th:text="${'Посиллання: '+order.getLink()}"></h6>
+            <h6 th:text="${'Трек номер: '+order.getTrackNumber()}"></h6>
+            <h6 th:text="${'Кількість: '+order.getNumber()}"></h6>
+            <h6 th:text="${'Опис: '+order.getDescription()}"></h6>
+            <h6 th:text="${'Дата реєстрації: '+order.getDataRegistration()}"></h6>
+            <h6 th:text="${'Дата отримання: '+order.getDateReceiving()}"></h6>
+            <h6 th:text="${'Ціна товару: '+order.getPrice()}"></h6>
+            <h6 th:text="${'Загальна ціна: '+order.getTotalPrice()}"></h6>
+            <h6>Додаткові сервіси:</h6>
+            <ul th:each="service : ${order.getAdditionalServices()}">
+                <li th:text="${service}"></li>
+            </ul>
+
+
+        </div>
+
+        <div class="col-5 bg-light p-3 border">
+            <form method="post"
+                  th:action="@{/admin/orders/edit/{type}/{id}(type=${order.isOnlyDelivery()},id=${order.id})}">
+                <label style="display: inline-block;">Транспорт:</label>
+                <select class="form-select" aria-label="Default select example" name="transport"
+                        style="display: inline-block; width: 40%">
+                    <option selected th:text="${order.getTransport()}" hidden></option>
+                    <div th:each="transport:${transport}">
+                        <option th:value="${transport}" th:text="${transport}"></option>
+                    </div>
+                </select>
+
+                <br/>
+                <b>Вага</b> <input class="form-control" type="text" name="weight" placeholder="назва"
+                                   style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
+                <b>Ціна</b> <input class="form-control" type="text" name="price" placeholder="назва"
+                                   style="display: inline-block; margin-top: 35px; width: 40%;margin-bottom: 20px"><br/>
+                <input type="hidden" name="services" value="9">
+                <div th:each="service:${additionalServices}">
+                    <h6 th:text="${service.getName()}" style="display: inline-block;"></h6>
+                    <input type="checkbox" name="services" th:value="${service.id}" style="display: inline-block;">
+                </div>
+
+                <center>
+                    <button type="submit" class="btn-secondary btn" style="margin-top: 25px">
+                        Розразувати
+                    </button>
+                </center>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

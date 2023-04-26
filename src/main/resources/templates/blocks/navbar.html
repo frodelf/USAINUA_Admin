@@ -1,0 +1,88 @@
+<div th:fragment="header">
+
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="width: 100%; margin-left: 0px;">
+        <ul class="navbar-nav ml-auto">
+            <img src="/images/account.svg" style="width:40px; height: 40px;">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${username}">
+                    Username
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/logout">Вийти</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <div class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition">
+            <div class="os-padding">
+                <div class="os-content" style="padding: 0px 8px; height: 100%; width: 100%;">
+                    <a href="/admin/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                        <span class="fs-4">USAINUA</span>
+                    </a>
+                    <hr>
+                    <div class="nav nav-pills flex-column mb-auto">
+                        <a href="/admin/shops/" class="nav-link">
+                            <i class="nav-icon fas fa-chart-pie"></i>
+                            <p>
+                                Магазини
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <a href="/admin/products/" class="nav-link">
+                            <i class="nav-icon fas fa-chart-pie"></i>
+                            <p>
+                                Продукти
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <a href="/admin/additional-services/" class="nav-link">
+                            <i class="nav-icon fas fa-chart-pie"></i>
+                            <p>
+                                Сервіси
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <a href="/admin/storages/" class="nav-link">
+                            <i class="nav-icon fas fa-chart-pie"></i>
+                            <p>
+                                Склади
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <a href="/admin/news/" class="nav-link">
+                            <i class="nav-icon fas fa-chart-pie"></i>
+                            <p>
+                                Новини
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <a href="/admin/orders/" class="nav-link">
+                            <i class="nav-icon fas fa-chart-pie"></i>
+                            <p>
+                                Замовлення
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+<!--                        <a href="/admin/test/" class="nav-link">-->
+<!--                            <i class="nav-icon fas fa-chart-pie"></i>-->
+<!--                            <p>-->
+<!--                                Тест-->
+<!--                                <i class="right fas fa-angle-left"></i>-->
+<!--                            </p>-->
+<!--                        </a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>

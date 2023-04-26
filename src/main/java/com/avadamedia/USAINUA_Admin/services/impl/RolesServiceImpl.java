@@ -1,0 +1,17 @@
+package com.avadamedia.USAINUA_Admin.services.impl;
+
+import com.avadamedia.USAINUA_Admin.entity.Roles;
+import com.avadamedia.USAINUA_Admin.repositories.RolesRepository;
+import com.avadamedia.USAINUA_Admin.services.RolesService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class RolesServiceImpl implements RolesService {
+    private final RolesRepository rolesRepository;
+
+    public Roles getById(long id){
+        return rolesRepository.findById(id).get();
+    }
+}
