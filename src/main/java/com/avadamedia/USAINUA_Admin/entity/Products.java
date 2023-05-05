@@ -1,10 +1,7 @@
 package com.avadamedia.USAINUA_Admin.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,11 +30,11 @@ public class Products {
 
 
     @NotBlank(message = "Посилання на продукт не може бути порожнім")
-    @Column(unique = true)
+    @Column(unique = true, length = 1000)
     @URL(message = "Посилання має бути URL-адресою")
     private String link;
 
     @NotBlank(message = "Фотографія для продукту не може бути порожньою")
-    @Column(name = "image-name", unique = true)
+    @Column(name = "image_name", unique = true)
     private String imageName;
 }

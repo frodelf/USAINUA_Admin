@@ -1,10 +1,7 @@
 package com.avadamedia.USAINUA_Admin.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,12 +33,10 @@ public class Users {
     @Column(name = "is_man")
     @NotNull(message = "Стать користувача не була вказана")
     private Boolean isMan;
-    @Column(name = "birthday_date")
-    @Temporal(TemporalType.DATE)
     @NotNull(message = "Дата дня народження не була вказана")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
-    @Column(name = "e-mail", unique = true)
+    @Column(unique = true)
     @Email(message = "Електрона адреса не коректна")
     @NotBlank(message = "Електроний адрес не був вказаний")
     private String email;
@@ -50,9 +45,6 @@ public class Users {
     private String phone;
     @OneToMany
     List<Orders> orders;
-
-    @OneToMany
-    List<Storage> compositions;
 
     @OneToMany
     List<CreditCards> creditCards;

@@ -2,6 +2,8 @@ package com.avadamedia.USAINUA_Admin.config;
 
 import com.avadamedia.USAINUA_Admin.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -27,7 +29,7 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(auth -> {
-                    auth.requestMatchers("/admin/**").hasRole("ADMIN");
+                    auth.antMatchers("/admin/**").hasRole("ADMIN");
                 })
                 .formLogin(login -> {
                     login.loginPage("/login")

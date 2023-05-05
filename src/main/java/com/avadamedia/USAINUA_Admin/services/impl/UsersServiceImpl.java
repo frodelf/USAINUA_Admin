@@ -4,6 +4,7 @@ import com.avadamedia.USAINUA_Admin.entity.Users;
 import com.avadamedia.USAINUA_Admin.repositories.UsersRepository;
 import com.avadamedia.USAINUA_Admin.services.UsersService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

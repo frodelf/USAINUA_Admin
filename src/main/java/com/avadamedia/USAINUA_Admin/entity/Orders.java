@@ -1,7 +1,7 @@
 package com.avadamedia.USAINUA_Admin.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -53,13 +53,11 @@ public class Orders {
     @NotNull(message = "Поле 'only_delivery' не може бути null")
     private boolean isOnlyDelivery;
     @Column(name = "data_registration")
-    @Temporal(TemporalType.DATE)
     @NotNull(message = "Поле 'data_registration' не може бути null")
     @PastOrPresent(message = "Дата реєстрації не може бути в майбутньому")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataRegistration;
     @Column(name = "date_receiving")
-    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateReceiving;
 

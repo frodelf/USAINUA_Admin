@@ -25,8 +25,6 @@ public class ImageUtil {
         String format = originalFilename.substring(originalFilename.lastIndexOf("."));
         String nameImage = generateName()+format;
         Files.copy(image.getInputStream(), uploadPath.resolve(nameImage));
-        log.info(String.valueOf(uploadPath.resolve(shop.getImageName())));
-        deleteImage(String.valueOf(uploadPath.resolve(shop.getImageName())));
         shop.setImageName(nameImage);
     }
 
@@ -36,8 +34,6 @@ public class ImageUtil {
         String format = originalFilename.substring(originalFilename.lastIndexOf("."));
         String nameImage = generateName()+format;
         Files.copy(image.getInputStream(), uploadPath.resolve(nameImage));
-        log.info(String.valueOf(uploadPath.resolve(products.getImageName())));
-        deleteImage(String.valueOf(uploadPath.resolve(products.getImageName())));
         products.setImageName(nameImage);
     }
 

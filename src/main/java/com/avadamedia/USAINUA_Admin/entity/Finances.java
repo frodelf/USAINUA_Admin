@@ -1,8 +1,7 @@
 package com.avadamedia.USAINUA_Admin.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotNull;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +20,6 @@ public class Finances {
     @Column(name = "id")
     private Long id;
 
-    @Temporal(TemporalType.DATE)
     @NotNull(message = "Дата оплачення посилки(Finances) не була вказана")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
