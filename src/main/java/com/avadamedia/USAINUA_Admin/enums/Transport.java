@@ -3,12 +3,19 @@ package com.avadamedia.USAINUA_Admin.enums;
 import java.util.Arrays;
 import java.util.List;
 
-public class Transport {
-    public static final String PLANE = "plane";
-    public static final String SHIP = "ship";
-    public static final String ANOTHER = "another";
+public enum Transport {
+    PLANE("plane"),
+    SHIP("ship"),
+    ANOTHER("another");
+    private String transport;
+    Transport(String transport) {
+        this.transport = transport;
+    }
+    public String getTransport() {
+        return transport;
+    }
     public static List<String> getAll(){
-        return Arrays.asList(PLANE, SHIP, ANOTHER);
+        return Arrays.asList(PLANE.transport, SHIP.transport, ANOTHER.transport);
     }
 
 }

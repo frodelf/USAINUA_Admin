@@ -1,54 +1,54 @@
 <div th:fragment="header">
-    <a href="/admin/stats/" class="nav-link">
+    <a th:href="@{{context_path}/admin/stats/(context_path=${context_path})}" class="nav-link">
         <i class="nav-icon fas fa-chart-pie"></i>
         <p>
             Статистика
             <i class="right fas fa-angle-left"></i>
         </p>
     </a>
-    <a href="/admin/shops/" class="nav-link">
+    <a th:href="@{{context_path}/admin/shops/(context_path=${context_path})}" class="nav-link">
         <i class="nav-icon fas fa-chart-pie"></i>
         <p>
             Магазини
             <i class="right fas fa-angle-left"></i>
         </p>
     </a>
-    <a href="/admin/products/" class="nav-link">
+    <a th:href="@{{context_path}/admin/products/(context_path=${context_path})}" class="nav-link">
         <i class="nav-icon fas fa-chart-pie"></i>
         <p>
             Продукти
             <i class="right fas fa-angle-left"></i>
         </p>
     </a>
-    <a href="/admin/additional-services/" class="nav-link">
+    <a th:href="@{{context_path}/admin/additional-services/(context_path=${context_path})}" class="nav-link">
         <i class="nav-icon fas fa-chart-pie"></i>
         <p>
             Сервіси
             <i class="right fas fa-angle-left"></i>
         </p>
     </a>
-    <a href="/admin/storages/" class="nav-link">
+    <a th:href="@{{context_path}/admin/storages/(context_path=${context_path})}" class="nav-link">
         <i class="nav-icon fas fa-chart-pie"></i>
         <p>
             Склади
             <i class="right fas fa-angle-left"></i>
         </p>
     </a>
-    <a href="/admin/news/" class="nav-link">
+    <a th:href="@{{context_path}/admin/news/(context_path=${context_path})}" class="nav-link">
         <i class="nav-icon fas fa-chart-pie"></i>
         <p>
             Новини
             <i class="right fas fa-angle-left"></i>
         </p>
     </a>
-    <a href="/admin/orders/" class="nav-link">
+    <a th:href="@{{context_path}/admin/orders/(context_path=${context_path})}" class="nav-link">
         <i class="nav-icon fas fa-chart-pie"></i>
         <p>
             Замовлення
             <i class="right fas fa-angle-left"></i>
         </p>
     </a>
-    <a href="/admin/test/" class="nav-link">
+    <a th:href="@{{context_path}/admin/test/(context_path=${context_path})}" class="nav-link">
         <i class="nav-icon fas fa-chart-pie"></i>
         <p>
             Тест

@@ -1,11 +1,13 @@
 package com.avadamedia.USAINUA_Admin.config;
 
+import com.avadamedia.USAINUA_Admin.enums.ContextPath;
 import com.avadamedia.USAINUA_Admin.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,7 +20,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
     private UserServiceImpl userServiceImpl;
-
+    @Autowired
+    private Environment env;
     @Autowired
     public void setUserService(UserServiceImpl userServiceImpl) {
         this.userServiceImpl = userServiceImpl;

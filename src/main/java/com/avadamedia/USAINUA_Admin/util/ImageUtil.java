@@ -20,21 +20,29 @@ public class ImageUtil {
     private final ShopsServiceImpl shopsServiceImpl;
     private final ProductsServiceImpl productsServiceImpl;
     public static void imageForShop(Shops shop, MultipartFile image) throws IOException {
-        Path uploadPath = Paths.get("uploads/shops");
-        String originalFilename = image.getOriginalFilename();
-        String format = originalFilename.substring(originalFilename.lastIndexOf("."));
-        String nameImage = generateName()+format;
-        Files.copy(image.getInputStream(), uploadPath.resolve(nameImage));
-        shop.setImageName(nameImage);
+        try {
+            Path uploadPath = Paths.get("kino.avada-media-dev1.od.ua/USAINUA_Admin/shops");
+            String originalFilename = image.getOriginalFilename();
+            String format = originalFilename.substring(originalFilename.lastIndexOf("."));
+            String nameImage = generateName() + format;
+            Files.copy(image.getInputStream(), uploadPath.resolve(nameImage));
+            shop.setImageName(nameImage);
+        }catch (Exception e){
+            throw new RuntimeException("shop");
+        }
     }
 
     public static void imageForProducts(Products products, MultipartFile image) throws IOException {
-        Path uploadPath = Paths.get("uploads/products");
-        String originalFilename = image.getOriginalFilename();
-        String format = originalFilename.substring(originalFilename.lastIndexOf("."));
-        String nameImage = generateName()+format;
-        Files.copy(image.getInputStream(), uploadPath.resolve(nameImage));
-        products.setImageName(nameImage);
+        try {
+            Path uploadPath = Paths.get("tomcat/webapps/USAINUA_Admin/products");
+            String originalFilename = image.getOriginalFilename();
+            String format = originalFilename.substring(originalFilename.lastIndexOf("."));
+            String nameImage = generateName() + format;
+            Files.copy(image.getInputStream(), uploadPath.resolve(nameImage));
+            products.setImageName(nameImage);
+        }catch (Exception e){
+            throw new RuntimeException("products");
+        }
     }
 
     public static String generateName() {

@@ -1,5 +1,6 @@
 package com.avadamedia.USAINUA_Admin.controllers;
 
+import com.avadamedia.USAINUA_Admin.enums.ContextPath;
 import com.avadamedia.USAINUA_Admin.enums.Status;
 import com.avadamedia.USAINUA_Admin.enums.Transport;
 import com.avadamedia.USAINUA_Admin.enums.Type;
@@ -26,6 +27,7 @@ import java.util.List;
 @Log4j2
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/")
 public class AdminController {
     private final ShopsServiceImpl shopsServiceImpl;
     private final ProductsServiceImpl productsServiceImpl;
@@ -36,14 +38,15 @@ public class AdminController {
     private final NewsServiceImpl newsService;
     private final OrdersServiceImpl ordersService;
 
-    @ModelAttribute("menu")
+    @ModelAttribute("header")
     public String getHeader(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("username", usersServiceImpl.getByEmail(authentication.getName()).getName());
-        return "blocks/menu";
+        model.addAttribute("username", usersServiceImpl.getByEmail(authentication.getName()).getEmail());
+        return "blocks/navbar";
     }
     @GetMapping("/admin/")
     public String stats(Model model){
+        log.info("admin");
         model.addAttribute("woman", usersServiceImpl.getAllWoman().size());
         model.addAttribute("man", usersServiceImpl.getAllMan().size());
         model.addAttribute("months", new Gson().toJson(statsServiceImpl.getAllMonth()));
@@ -55,11 +58,13 @@ public class AdminController {
     }
     @GetMapping("/admin/shops/")
     public String shop(Model model){
+        log.info("shops");
         model.addAttribute("shops", shopsServiceImpl.getAll());
         return "admin/shops";
     }
     @GetMapping("/admin/shop/add/")
     public String shopAddStart(){
+        log.info("shop");
         return "admin/shops-add";
     }
     @PostMapping("/admin/shop/add/")
@@ -91,6 +96,7 @@ public class AdminController {
     }
     @GetMapping("/admin/products/")
     public String products(Model model){
+        log.info("products");
         model.addAttribute("products", productsServiceImpl.getAll());
         return "admin/products";
     }
@@ -304,7 +310,7 @@ public class AdminController {
             else if(transport.equals("ship"))totalPrice += 0.05*Double.valueOf(price)+0.3*Double.valueOf(weight)+500;
             else totalPrice += 800;
         }
-        orders.setStatus(Status.READY_FOR_PAYMENT);
+        orders.setStatus(Status.READY_FOR_PAYMENT.getStatus());
         orders.setTotalPrice(totalPrice);
         ordersService.save(orders);
         return "redirect:/admin/orders/edit/"+id;

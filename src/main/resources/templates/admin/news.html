@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/adminLte/css/adminlte.css"/>
+    <link rel="stylesheet" th:href="@{{context_path}/adminLte/css/adminlte.css(context_path=${context_path})}"/>
 
 </head>
 
@@ -35,13 +35,13 @@
                     <h6 th:text="${news.getDate().toString()}"/>
                 </td>
                 <td style="width: 20%">
-                    <form method="post" th:action="@{/admin/news/delete/{id}(id=${news.id})}"
+                    <form method="post" th:action="@{{context_path}/admin/news/delete/{id}(context_path=${context_path}, id=${news.id})}"
                           style="display: inline-block;">
                         <button type="submit" name="action" value="delete" class="btn btn-secondary">
                             <img src="/images/delete.png" class="img-fluid" style="width: 20px; height: 20px;">
                         </button>
                     </form>
-                    <form method="get" th:action="@{/admin/news/edit/{id}(id=${news.id})}"
+                    <form method="get" th:action="@{{context_path}/admin/news/edit/{id}(context_path=${context_path}, id=${news.id})}"
                           style="display: inline-block;">
                         <button type="submit" class="btn btn-secondary" style="margin-left: 20px">
                             <img src="/images/edit.png" class="img-fluid" style="width: 20px; height: 20px;">
@@ -51,7 +51,7 @@
             </tr>
         </table>
         <button type="button" class="btn btn-secondary" style="margin-top: 25px"
-                onclick="window.location.href = '/admin/news/add/'">
+                th:onclick="|window.location.href = '@{{context_path}/admin/news/add/(context_path=${context_path})}'|">
             Додати
         </button>
     </center>

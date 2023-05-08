@@ -1,11 +1,9 @@
 <div th:fragment="header">
-
     <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="width: 100%; margin-left: 0px;">
         <ul class="navbar-nav ml-auto">
-            <img src="/images/account.svg" style="width:40px; height: 40px;">
+            <img th:src="@{{context_path}/images/account.svg(context_path=${context_path})}" style="width:40px; height: 40px;">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${username}">
-                    Username
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="/logout">Вийти</a>
@@ -25,48 +23,48 @@
         <div class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition">
             <div class="os-padding">
                 <div class="os-content" style="padding: 0px 8px; height: 100%; width: 100%;">
-                    <a href="/admin/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <a th:href="@{{context_path}/admin/(context_path=${context_path})}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
                         <span class="fs-4">USAINUA</span>
                     </a>
                     <hr>
                     <div class="nav nav-pills flex-column mb-auto">
-                        <a href="/admin/shops/" class="nav-link">
+                        <a th:href="@{{context_path}/admin/shops/(context_path=${context_path})}" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
                                 Магазини
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <a href="/admin/products/" class="nav-link">
+                        <a th:href="@{{context_path}/admin/products/(context_path=${context_path})}" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
                                 Продукти
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <a href="/admin/additional-services/" class="nav-link">
+                        <a th:href="@{{context_path}/admin/additional-services/(context_path=${context_path})}" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
                                 Сервіси
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <a href="/admin/storages/" class="nav-link">
+                        <a th:href="@{{context_path}/admin/storages/(context_path=${context_path})}" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
                                 Склади
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <a href="/admin/news/" class="nav-link">
+                        <a th:href="@{{context_path}/admin/news/(context_path=${context_path})}" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
                                 Новини
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <a href="/admin/orders/" class="nav-link">
+                        <a th:href="@{{context_path}/admin/orders/(context_path=${context_path})}" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
                                 Замовлення

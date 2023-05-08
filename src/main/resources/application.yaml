@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:mysql://kino.avada-media-dev1.od.ua:3306/avada_kino
+    username: avada_kino
+    password: OUlIg40qOZ
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  web:
+    resources:
+      static-locations: classpath:/uploads/,classpath:/static/
+  myapp:
+    submit-url: /USAINUA_Admin
+server:
+  servlet:
+    context-path: /USAINUA_Admin
+#  tomcat:
+#    accesslog:
+#      enabled: true
+#      directory: USAINUA_Admin
+#      pattern: common
+#      suffix: .log
+#      prefix: logs
+#      file-date-format: .yyyy-MM-dd
+#    basedir: logging
+#logging:
+#  file:
+#    path: /logging/USAINUA_Admin/
+#    name: logs.log
