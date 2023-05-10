@@ -25,4 +25,4 @@ jobs:
           remote: /tomcat/webapps/
           host: kino.avada-media-dev1.od.ua
           username: avada_kino
-          password: #Es84!4lZ0P7
+          password: \#Es84!4lZ0P7
