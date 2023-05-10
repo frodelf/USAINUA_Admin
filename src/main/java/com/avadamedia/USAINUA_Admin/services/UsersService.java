@@ -1,15 +1,15 @@
 package com.avadamedia.USAINUA_Admin.services;
 
-import com.avadamedia.USAINUA_Admin.entity.Users;
+import com.avadamedia.USAINUA_Admin.entity.User;
 
 import java.util.List;
 
 public interface UsersService {
-    void save(Users users);
-    Users getById(long id);
-    Users getByEmail(String email);
-    List<Users> getAllMan();
-    List<Users> getAllWoman();
-    List<Users> getAll();
-    Users getCurrentUser();
+    void save(User user);
+    User getById(long id);
+    User getByEmail(String email);
+    List<User> getAllMan();
+    List<User> getAllWoman();
+    List<User> getAll();
+    User getCurrentUser();
 }

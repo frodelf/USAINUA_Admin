@@ -1,10 +1,9 @@
 package com.avadamedia.USAINUA_Admin.services.impl;
 
-import com.avadamedia.USAINUA_Admin.entity.Users;
+import com.avadamedia.USAINUA_Admin.entity.User;
 import com.avadamedia.USAINUA_Admin.repositories.UsersRepository;
 import com.avadamedia.USAINUA_Admin.services.UsersService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -16,14 +15,14 @@ import java.util.List;
 public class UsersServiceImpl implements UsersService {
     private final UsersRepository usersRepository;
 
-    public void save(Users users){usersRepository.save(users);}
-    public Users getById(long id){return usersRepository.findById(id).get();}
-    public Users getByEmail(String email){return usersRepository.findByEmail(email).get();}
-    public List<Users> getAllMan(){return usersRepository.findByIsManIsTrue();}
-    public List<Users> getAllWoman(){return usersRepository.findByIsManIsFalse();}
-    public List<Users> getAll(){return usersRepository.findAll();}
+    public void save(User user){usersRepository.save(user);}
+    public User getById(long id){return usersRepository.findById(id).get();}
+    public User getByEmail(String email){return usersRepository.findByEmail(email).get();}
+    public List<User> getAllMan(){return usersRepository.findByIsManIsTrue();}
+    public List<User> getAllWoman(){return usersRepository.findByIsManIsFalse();}
+    public List<User> getAll(){return usersRepository.findAll();}
 
-    public Users getCurrentUser(){
+    public User getCurrentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return usersRepository.findByEmail(authentication.getName()).get();
     }

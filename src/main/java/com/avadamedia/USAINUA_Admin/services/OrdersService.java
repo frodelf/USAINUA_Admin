@@ -1,11 +1,11 @@
 package com.avadamedia.USAINUA_Admin.services;
 
-import com.avadamedia.USAINUA_Admin.entity.Orders;
+import com.avadamedia.USAINUA_Admin.entity.Order;
 
 import java.util.List;
 
 public interface OrdersService {
-    void save(Orders orders);
-    List<Orders> getAll();
-    Orders getById(long id);
+    void save(Order order);
+    List<Order> getAll();
+    Order getById(long id);
 }

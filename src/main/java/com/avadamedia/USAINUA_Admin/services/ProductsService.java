@@ -1,13 +1,13 @@
 package com.avadamedia.USAINUA_Admin.services;
 
-import com.avadamedia.USAINUA_Admin.entity.Products;
+import com.avadamedia.USAINUA_Admin.entity.Product;
 
 import java.util.List;
 
 public interface ProductsService {
-    void save(Products products);
-    List<Products> getAll();
-    Products getByLink(String link);
+    void save(Product product);
+    List<Product> getAll();
+    Product getByLink(String link);
     void deleteById(Long id);
-    Products getById(long id);
+    Product getById(long id);
 }

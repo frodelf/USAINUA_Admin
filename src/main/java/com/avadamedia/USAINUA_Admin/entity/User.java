@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -44,10 +44,10 @@ public class Users {
     @Pattern(regexp = "^[0-9]+$", message = "Некоректний номер телефону")
     private String phone;
     @OneToMany
-    List<Orders> orders;
+    List<Order> orders;
 
     @OneToMany
-    List<CreditCards> creditCards;
+    List<CreditCard> creditCards;
 
     @OneToMany
     List<Finances> finances;
@@ -56,5 +56,5 @@ public class Users {
     List<UsersAddress> usersAddresses;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    List<Roles> roles;
+    List<Role> roles;
 }

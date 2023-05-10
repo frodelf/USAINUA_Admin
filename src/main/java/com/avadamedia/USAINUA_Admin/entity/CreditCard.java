@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreditCards {
+public class CreditCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -32,7 +32,7 @@ public class CreditCards {
     @Pattern(regexp = "^[0-9]+$", message = "Некоректний CVV код карти, повинен бути формат \"123\"")
     private String cvv;
 
-    public CreditCards(String cardsNumber, String validityPeriod, String cvv) {
+    public CreditCard(String cardsNumber, String validityPeriod, String cvv) {
         this.cardsNumber = cardsNumber;
         this.validityPeriod = validityPeriod;
         this.cvv = cvv;

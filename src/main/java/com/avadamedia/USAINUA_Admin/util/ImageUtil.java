@@ -1,7 +1,7 @@
 package com.avadamedia.USAINUA_Admin.util;
 
-import com.avadamedia.USAINUA_Admin.entity.Products;
-import com.avadamedia.USAINUA_Admin.entity.Shops;
+import com.avadamedia.USAINUA_Admin.entity.Product;
+import com.avadamedia.USAINUA_Admin.entity.Shop;
 import com.avadamedia.USAINUA_Admin.services.impl.ProductsServiceImpl;
 import com.avadamedia.USAINUA_Admin.services.impl.ShopsServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import java.util.Random;
 public class ImageUtil {
     private final ShopsServiceImpl shopsServiceImpl;
     private final ProductsServiceImpl productsServiceImpl;
-    public static void imageForShop(Shops shop, MultipartFile image) throws IOException {
+    public static void imageForShop(Shop shop, MultipartFile image) throws IOException {
         String uploadDir = System.getProperty("user.dir") + "/shop";
         File uploadDirFile = new File(uploadDir);
         if (!uploadDirFile.exists()) {
@@ -36,7 +36,7 @@ public class ImageUtil {
 
 
 
-    public static void imageForProducts(Products products, MultipartFile image) throws IOException {
+    public static void imageForProducts(Product product, MultipartFile image) throws IOException {
         String uploadDir = System.getProperty("user.dir") + "/uploads/products";
         File uploadDirFile = new File(uploadDir);
         if (!uploadDirFile.exists()) {
@@ -47,7 +47,7 @@ public class ImageUtil {
             String nameImage = generateName() + format;
             Path uploadPath = Paths.get(uploadDir + nameImage);
             Files.copy(image.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
-            products.setImageName(nameImage);
+            product.setImageName(nameImage);
     }
 
     public static String generateName() {

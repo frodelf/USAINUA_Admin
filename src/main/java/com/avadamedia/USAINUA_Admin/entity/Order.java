@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Orders {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -63,7 +63,7 @@ public class Orders {
 
 
     @ManyToMany
-    private List<AdditionalServices> additionalServices;
+    private List<AdditionalService> additionalServices;
     @ManyToOne
     UsersAddress usersAddresses;
 }

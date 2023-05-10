@@ -31,7 +31,7 @@
 
                 </td>
             </tr>
-            <tr th:each="order:${orders}">
+            <tr th:each="order:${order}">
                 <td style="width: 20%; border: 2px solid black">
                     <h6 th:text="${order.id}"></h6>
                 </td>
@@ -45,7 +45,7 @@
                     <h6 th:text="${order.dataRegistration}"></h6>
                 </td>
                 <td style="width: 20%">
-                    <form method="get" th:action="@{{context_path}/admin/orders/edit/{id}(context_path=${context_path}, id=${order.id})}"
+                    <form method="get" th:action="@{{context_path}/admin/order/edit/{id}(context_path=${context_path}, id=${order.id})}"
                           style="display: inline-block;">
                         <button type="submit" class="btn btn-secondary" style="margin-left: 20px">
                             <img th:src="@{{context_path}/images/edit.png(context_path=${context_path})}" class="img-fluid" style="width: 20px; height: 20px;">

@@ -1,7 +1,7 @@
 package com.avadamedia.USAINUA_Admin.services.impl;
 
-import com.avadamedia.USAINUA_Admin.entity.Roles;
-import com.avadamedia.USAINUA_Admin.entity.Users;
+import com.avadamedia.USAINUA_Admin.entity.Role;
+import com.avadamedia.USAINUA_Admin.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,12 +26,12 @@ public class UserServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info(username);
-        Users user = usersServiceImpl.getByEmail(username);
+        User user = usersServiceImpl.getByEmail(username);
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
                 getAuthorities(user.getRoles()));
     }
 
-    private Collection<? extends GrantedAuthority> getAuthorities(List<Roles> roles) {
+    private Collection<? extends GrantedAuthority> getAuthorities(List<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 }

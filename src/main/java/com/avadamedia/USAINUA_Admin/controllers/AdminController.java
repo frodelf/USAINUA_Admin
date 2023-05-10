@@ -1,6 +1,5 @@
 package com.avadamedia.USAINUA_Admin.controllers;
 
-import com.avadamedia.USAINUA_Admin.enums.ContextPath;
 import com.avadamedia.USAINUA_Admin.enums.Status;
 import com.avadamedia.USAINUA_Admin.enums.Transport;
 import com.avadamedia.USAINUA_Admin.enums.Type;
@@ -69,10 +68,10 @@ public class AdminController {
     }
     @PostMapping("/admin/shop/add/")
     public String shopAddEnd(@RequestParam("link")String link, @RequestParam("image")MultipartFile image) throws IOException {
-        Shops shops = new Shops();
-        shops.setLink(link);
-        ImageUtil.imageForShop(shops, image);
-        shopsServiceImpl.save(shops);
+        Shop shop = new Shop();
+        shop.setLink(link);
+        ImageUtil.imageForShop(shop, image);
+        shopsServiceImpl.save(shop);
         return "redirect:/admin/shops/";
     }
     @PostMapping("/admin/shop/delete/{id}")
@@ -88,10 +87,10 @@ public class AdminController {
     }
     @PostMapping("/admin/shop/edit/{id}")
     public String shopEditByIdEnd(@PathVariable("id")long id, @RequestParam("link")String link, @RequestParam("image")MultipartFile image) throws IOException {
-        Shops shops = shopsServiceImpl.getById(id);
-        shops.setLink(link);
-        if(!image.isEmpty()) ImageUtil.imageForShop(shops, image);
-        shopsServiceImpl.save(shops);
+        Shop shop = shopsServiceImpl.getById(id);
+        shop.setLink(link);
+        if(!image.isEmpty()) ImageUtil.imageForShop(shop, image);
+        shopsServiceImpl.save(shop);
         return "redirect:/admin/shops/";
     }
     @GetMapping("/admin/products/")
@@ -108,19 +107,19 @@ public class AdminController {
     @PostMapping("/admin/product/add/")
     public String productAddEnd(@RequestParam("name")String name, @RequestParam("price")String price, @RequestParam("link")String link,
                                 @RequestParam("type")String type, @RequestParam("image")MultipartFile image)  {
-        Products products = new Products();
+        Product product = new Product();
         try{
-        products.setName(name);
-        products.setLink(link);
-        products.setPrice(Double.parseDouble(price));
-        products.setType(type);
-        ImageUtil.imageForProducts(products, image);
+        product.setName(name);
+        product.setLink(link);
+        product.setPrice(Double.parseDouble(price));
+        product.setType(type);
+        ImageUtil.imageForProducts(product, image);
         } catch (RuntimeException e) {
             e.printStackTrace();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        productsServiceImpl.save(products);
+        productsServiceImpl.save(product);
 
         return "redirect:/admin/products/";
     }
@@ -139,13 +138,13 @@ public class AdminController {
     public String productEditEnd(@PathVariable("id")long id, @RequestParam("name")String name, @RequestParam("price")String price,
                                  @RequestParam("link")String link, @RequestParam("type")String type,
                                  @RequestParam("image")MultipartFile image) throws IOException {
-        Products products = productsServiceImpl.getById(id);
-        products.setName(name);
-        products.setPrice(Double.parseDouble(price));
-        products.setLink(link);
-        if(type != null)products.setType(type);
-        if(!image.isEmpty()) ImageUtil.imageForProducts(products, image);
-        productsServiceImpl.save(products);
+        Product product = productsServiceImpl.getById(id);
+        product.setName(name);
+        product.setPrice(Double.parseDouble(price));
+        product.setLink(link);
+        if(type != null) product.setType(type);
+        if(!image.isEmpty()) ImageUtil.imageForProducts(product, image);
+        productsServiceImpl.save(product);
         return "redirect:/admin/products/";
     }
     @GetMapping("/admin/additional-services/")
@@ -159,10 +158,10 @@ public class AdminController {
     }
     @PostMapping("/admin/additional-services/add/")
     public String additionalServicesEnd(@RequestParam("name")String name, @RequestParam("price")String price){
-        AdditionalServices additionalServices = new AdditionalServices();
-        additionalServices.setName(name);
-        additionalServices.setPrice(Double.parseDouble(price));
-        additionalServicesService.save(additionalServices);
+        AdditionalService additionalService = new AdditionalService();
+        additionalService.setName(name);
+        additionalService.setPrice(Double.parseDouble(price));
+        additionalServicesService.save(additionalService);
         return "redirect:/admin/additional-services/";
     }
     @GetMapping("/admin/additional-services/edit/{id}")
@@ -172,10 +171,10 @@ public class AdminController {
     }
     @PostMapping("/admin/additional-services/edit/{id}")
     public String additionalServicesEditEnd(@PathVariable("id")Long id, @RequestParam("name")String name, @RequestParam("price")String price){
-        AdditionalServices additionalServices = additionalServicesService.getById(id);
-        additionalServices.setName(name);
-        additionalServices.setPrice(Double.parseDouble(price));
-        additionalServicesService.save(additionalServices);
+        AdditionalService additionalService = additionalServicesService.getById(id);
+        additionalService.setName(name);
+        additionalService.setPrice(Double.parseDouble(price));
+        additionalServicesService.save(additionalService);
         return "redirect:/admin/additional-services/";
     }
     @PostMapping("/admin/additional-services/delete/{id}")
@@ -284,9 +283,9 @@ public class AdminController {
     public String approximatePrice(@PathVariable("type")boolean type, @PathVariable("id")long id, @RequestParam("transport")String transport,
                                  @RequestParam("weight")String weight, @RequestParam("price")String price,
                                  @RequestParam("services") List<Long> additionalServicesId){
-        Orders orders = ordersService.getById(id);
+        Order order = ordersService.getById(id);
         additionalServicesId.remove(0);
-        List<AdditionalServices> additionalServices = new ArrayList<>();
+        List<AdditionalService> additionalServices = new ArrayList<>();
 
         try {
             for (Long aLong : additionalServicesId) {
@@ -297,7 +296,7 @@ public class AdminController {
         double totalPrice = 0;
         if(type){
             try{
-                for (AdditionalServices additionalService : additionalServices) {
+                for (AdditionalService additionalService : additionalServices) {
                     totalPrice +=additionalService.getPrice();
                 }
             }catch (Exception e){
@@ -307,7 +306,7 @@ public class AdminController {
             else totalPrice += 800;
         }else {
             try{
-                for (AdditionalServices additionalService : additionalServices) {
+                for (AdditionalService additionalService : additionalServices) {
                     totalPrice+=additionalService.getPrice();
                 }
             }catch (Exception e){
@@ -316,9 +315,9 @@ public class AdminController {
             else if(transport.equals("ship"))totalPrice += 0.05*Double.valueOf(price)+0.3*Double.valueOf(weight)+500;
             else totalPrice += 800;
         }
-        orders.setStatus(Status.READY_FOR_PAYMENT.getStatus());
-        orders.setTotalPrice(totalPrice);
-        ordersService.save(orders);
+        order.setStatus(Status.READY_FOR_PAYMENT.getStatus());
+        order.setTotalPrice(totalPrice);
+        ordersService.save(order);
         return "redirect:/admin/orders/edit/"+id;
     }
 

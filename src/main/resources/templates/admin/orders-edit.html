@@ -38,7 +38,7 @@
 
         <div class="col-5 bg-light p-3 border">
             <form method="post"
-                  th:action="@{{context_path}/admin/orders/edit/{type}/{id}(context_path=${context_path}, type=${order.isOnlyDelivery()},id=${order.id})}">
+                  th:action="@{{context_path}/admin/order/edit/{type}/{id}(context_path=${context_path}, type=${order.isOnlyDelivery()},id=${order.id})}">
                 <label style="display: inline-block;">Транспорт:</label>
                 <select class="form-select" aria-label="Default select example" name="transport"
                         style="display: inline-block; width: 40%">
@@ -54,7 +54,7 @@
                 <b>Ціна</b> <input class="form-control" type="text" name="price" placeholder="назва"
                                    style="display: inline-block; margin-top: 35px; width: 40%;margin-bottom: 20px"><br/>
                 <input type="hidden" name="services" value="9">
-                <div th:each="service:${additionalServices}">
+                <div th:each="service:${additionalService}">
                     <h6 th:text="${service.getName()}" style="display: inline-block;"></h6>
                     <input type="checkbox" name="services" th:value="${service.id}" style="display: inline-block;">
                 </div>
