@@ -1,5 +1,6 @@
 package com.avadamedia.USAINUA_Admin.exeption;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class CustomExceptionHandler {
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<Object> handleIOException(IOException ex) {
+        // Опрацювання помилки IOException
+        String message = "Сталася помилка під час завантаження зображення";
+        return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody

@@ -107,13 +107,19 @@ public class AdminController {
     }
     @PostMapping("/admin/product/add/")
     public String productAddEnd(@RequestParam("name")String name, @RequestParam("price")String price, @RequestParam("link")String link,
-                                @RequestParam("type")String type, @RequestParam("image")MultipartFile image) throws IOException {
+                                @RequestParam("type")String type, @RequestParam("image")MultipartFile image)  {
         Products products = new Products();
+        try{
         products.setName(name);
         products.setLink(link);
         products.setPrice(Double.parseDouble(price));
         products.setType(type);
         ImageUtil.imageForProducts(products, image);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         productsServiceImpl.save(products);
 
         return "redirect:/admin/products/";

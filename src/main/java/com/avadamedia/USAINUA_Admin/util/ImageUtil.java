@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Random;
 @Log4j2
 @RequiredArgsConstructor
@@ -20,29 +21,33 @@ public class ImageUtil {
     private final ShopsServiceImpl shopsServiceImpl;
     private final ProductsServiceImpl productsServiceImpl;
     public static void imageForShop(Shops shop, MultipartFile image) throws IOException {
-        try {
-            Path uploadPath = Paths.get("kino.avada-media-dev1.od.ua/USAINUA_Admin/shops");
+        String uploadDir = System.getProperty("user.dir") + "/shop";
+        File uploadDirFile = new File(uploadDir);
+        if (!uploadDirFile.exists()) {
+            uploadDirFile.mkdirs();
+        }
             String originalFilename = image.getOriginalFilename();
             String format = originalFilename.substring(originalFilename.lastIndexOf("."));
             String nameImage = generateName() + format;
-            Files.copy(image.getInputStream(), uploadPath.resolve(nameImage));
+            Path uploadPath = Paths.get(uploadDir + nameImage);
+            Files.copy(image.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
             shop.setImageName(nameImage);
-        }catch (Exception e){
-            throw new RuntimeException("shop");
-        }
     }
 
+
+
     public static void imageForProducts(Products products, MultipartFile image) throws IOException {
-        try {
-            Path uploadPath = Paths.get("tomcat/webapps/USAINUA_Admin/products");
+        String uploadDir = System.getProperty("user.dir") + "/uploads/products";
+        File uploadDirFile = new File(uploadDir);
+        if (!uploadDirFile.exists()) {
+            uploadDirFile.mkdirs();
+        }
             String originalFilename = image.getOriginalFilename();
             String format = originalFilename.substring(originalFilename.lastIndexOf("."));
             String nameImage = generateName() + format;
-            Files.copy(image.getInputStream(), uploadPath.resolve(nameImage));
+            Path uploadPath = Paths.get(uploadDir + nameImage);
+            Files.copy(image.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
             products.setImageName(nameImage);
-        }catch (Exception e){
-            throw new RuntimeException("products");
-        }
     }
 
     public static String generateName() {

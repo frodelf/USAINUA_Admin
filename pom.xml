@@ -88,6 +88,11 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.6</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -124,6 +129,8 @@
 						<resource>
 							<directory>${project.basedir}/uploads</directory>
 							<targetPath>WEB-INF/classes/uploads </targetPath>
+<!--							<directory>${project.basedir}/logging</directory>-->
+<!--							<targetPath>logging</targetPath>-->
 						</resource>
 					</webResources>
 					<failOnMissingWebXml>false</failOnMissingWebXml>

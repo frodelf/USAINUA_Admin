@@ -33,6 +33,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(auth -> {
                     auth.antMatchers("/admin/**").hasRole("ADMIN");
+                    auth.antMatchers("/").hasRole("ADMIN");
                 })
                 .formLogin(login -> {
                     login.loginPage("/login")
