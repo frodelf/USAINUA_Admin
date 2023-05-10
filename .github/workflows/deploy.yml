@@ -9,12 +9,21 @@ jobs:
       - name: Build the project
         run: |
           mvn package
+          mvn clean:clean
           mvn war:war
       - name: Copy folder content recursively to remote
         uses: garygrossgarten/github-action-scp@release
         with:
+          local: target/USAINUA_Admin
+          remote: tomcat/webapps/USAINUA_Admin
+          host: kino.avada-media-dev1.od.ua
+          username: avada_kino
+          password: "#Es84!4lZ0P7"
+      - name: Copy single file to remote
+        uses: garygrossgarten/github-action-scp@release
+        with:
           local: target/USAINUA_Admin.war
-          remote: /tomcat/webapps/
+          remote: tomcat/webapps/USAINUA_Admin.war
           host: kino.avada-media-dev1.od.ua
           username: avada_kino
           password: "#Es84!4lZ0P7"
