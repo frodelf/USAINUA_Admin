@@ -11,7 +11,7 @@ jobs:
           mvn package
           mvn clean:clean
           mvn war:war
-      - name: Copy folder content recursively to remote
+      - name: Copy folder
         uses: garygrossgarten/github-action-scp@release
         with:
           local: target/USAINUA_Admin
@@ -19,7 +19,7 @@ jobs:
           host: kino.avada-media-dev1.od.ua
           username: avada_kino
           password: "#Es84!4lZ0P7"
-      - name: Copy single file to remote
+      - name: Copy file
         uses: garygrossgarten/github-action-scp@release
         with:
           local: target/USAINUA_Admin.war
