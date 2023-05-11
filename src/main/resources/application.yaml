@@ -15,10 +15,8 @@ spring:
 server:
   servlet:
     context-path: /USAINUA_Admin
-
-
-#logging:
-#  config: classpath:logback.xml
+logging:
+  config: classpath:logback.xml
 
 
 #  tomcat:
