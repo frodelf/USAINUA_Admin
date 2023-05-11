@@ -15,13 +15,13 @@
 
     <div style="width: 105%">
         <div class="row">
-            <div th:each="product : ${product}" class="col-lg-4">
+            <div th:each="product : ${products}" class="col-lg-4">
                 <div class="col-6 col-md-6 mb-4 d-flex align-items-stretch flex-column">
                     <div class="card bg-light d-flex flex-fill">
                         <div class="card-body pt-0">
                             <div class="row">
                                 <div class="col-5 text-center">
-                                    <img th:src="@{{context_path}/product/{name}(context_path=${context_path},name=${product.imageName})}"
+                                    <img th:src="@{{context_path}/products/{name}(context_path=${context_path},name=${product.imageName})}"
                                          class="img-circle" style="width: 100px; height: 100px ;">
                                 </div>
                             </div>

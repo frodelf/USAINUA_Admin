@@ -45,7 +45,6 @@ public class AdminController {
     }
     @GetMapping("/admin/")
     public String stats(Model model){
-        log.info("admin");
         model.addAttribute("woman", usersServiceImpl.getAllWoman().size());
         model.addAttribute("man", usersServiceImpl.getAllMan().size());
         model.addAttribute("months", new Gson().toJson(statsServiceImpl.getAllMonth()));
@@ -57,7 +56,6 @@ public class AdminController {
     }
     @GetMapping("/admin/shops/")
     public String shop(Model model){
-        log.info("shops");
         model.addAttribute("shops", shopsServiceImpl.getAll());
         return "admin/shops";
     }
@@ -70,7 +68,7 @@ public class AdminController {
     public String shopAddEnd(@RequestParam("link")String link, @RequestParam("image")MultipartFile image) throws IOException {
         Shop shop = new Shop();
         shop.setLink(link);
-        ImageUtil.imageForShop(shop, image);
+        shop.setImageName(ImageUtil.imageForShop(shop, image));
         shopsServiceImpl.save(shop);
         return "redirect:/admin/shops/";
     }

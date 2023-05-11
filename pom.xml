@@ -119,8 +119,8 @@
 						<resource>
 							<directory>${project.basedir}/uploads</directory>
 							<targetPath>WEB-INF/classes/uploads </targetPath>
-							<directory>${project.basedir}/logging</directory>
-							<targetPath>logging</targetPath>
+<!--							<directory>${project.basedir}/logging</directory>-->
+<!--							<targetPath>logging</targetPath>-->
 						</resource>
 					</webResources>
 					<failOnMissingWebXml>false</failOnMissingWebXml>

@@ -13,42 +13,38 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Random;
+
 @Log4j2
 @RequiredArgsConstructor
 public class ImageUtil {
     private final ShopsServiceImpl shopsServiceImpl;
     private final ProductsServiceImpl productsServiceImpl;
-    public static void imageForShop(Shop shop, MultipartFile image) throws IOException {
-        String uploadDir = System.getProperty("user.dir") + "/shop";
-        log.info(uploadDir);
-        File uploadDirFile = new File(uploadDir);
-        if (!uploadDirFile.exists()) {
-            uploadDirFile.mkdirs();
+
+    public static String imageForShop(Shop shop, MultipartFile image) throws IOException {
+        Path uploadPath = Paths.get("/home/avada/web/kino.avada-media-dev1.od.ua/tomcat/webapps/USAINUA_Admin/WEB-INF/classes/uploads/shops");
+        String originalFilename = image.getOriginalFilename();
+        String format = originalFilename.substring(originalFilename.lastIndexOf("."));
+        String nameImage = generateName() + format;
+        try {
+            Files.copy(image.getInputStream(), uploadPath.resolve(nameImage));
+            deleteImage(String.valueOf(uploadPath.resolve(shop.getImageName())));
+        } catch (Exception e) {
         }
-            String originalFilename = image.getOriginalFilename();
-            String format = originalFilename.substring(originalFilename.lastIndexOf("."));
-            String nameImage = generateName() + format;
-            Path uploadPath = Paths.get(uploadDir + nameImage);
-            Files.copy(image.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
-            shop.setImageName(nameImage);
+        return nameImage;
     }
 
-
-
-    public static void imageForProducts(Product product, MultipartFile image) throws IOException {
-        String uploadDir = "/home/avada/web/kino.avada-media-dev1.od.ua/tomcat/webapps/USAINUA_Admin/WEb-INF/classes/uploads/products";
-        File uploadDirFile = new File(uploadDir);
-        if (!uploadDirFile.exists()) {
-            uploadDirFile.mkdirs();
-        }
+    public static void imageForProducts(Product products, MultipartFile image) throws IOException {
+            Path uploadPath = Paths.get("/home/avada/web/kino.avada-media-dev1.od.ua/tomcat/webapps/USAINUA_Admin/WEB-INF/classes/uploads/products");
             String originalFilename = image.getOriginalFilename();
             String format = originalFilename.substring(originalFilename.lastIndexOf("."));
             String nameImage = generateName() + format;
-            Path uploadPath = Paths.get(uploadDir + nameImage);
-            Files.copy(image.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
-            product.setImageName(nameImage);
+            Files.copy(image.getInputStream(), uploadPath.resolve(nameImage));
+        try {
+            deleteImage(String.valueOf(uploadPath.resolve(products.getImageName())));
+            products.setImageName(nameImage);
+        } catch (Exception e) {
+        }
     }
 
     public static String generateName() {
@@ -62,7 +58,7 @@ public class ImageUtil {
         return sb.toString();
     }
 
-    public static void deleteImage(String name){
+    public static void deleteImage(String name) {
         File file = new File(name);
         file.delete();
     }

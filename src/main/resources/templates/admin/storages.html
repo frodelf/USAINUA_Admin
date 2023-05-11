@@ -63,7 +63,7 @@
                             <img th:src="@{{context_path}/images/delete.png(context_path=${context_path})}" class="img-fluid" style="width: 20px; height: 20px;">
                         </button>
                     </form>
-                    <form method="get" th:action="@{@{{context_path}/admin/storage/edit/{id}(context_path=${context_path}, id=${storage.id})}"
+                    <form method="get" th:action="@{{context_path}/admin/storage/edit/{id}(context_path=${context_path}, id=${storage.id})}"
                           style="display: inline-block;">
                         <button type="submit" class="btn btn-secondary" style="margin-left: 10px">
                             <img th:src="@{{context_path}/images/edit.png(context_path=${context_path})}" class="img-fluid" style="width: 20px; height: 20px;">
