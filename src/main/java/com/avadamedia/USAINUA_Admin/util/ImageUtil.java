@@ -22,6 +22,7 @@ public class ImageUtil {
     private final ProductsServiceImpl productsServiceImpl;
     public static void imageForShop(Shop shop, MultipartFile image) throws IOException {
         String uploadDir = System.getProperty("user.dir") + "/shop";
+        log.info(uploadDir);
         File uploadDirFile = new File(uploadDir);
         if (!uploadDirFile.exists()) {
             uploadDirFile.mkdirs();
@@ -37,7 +38,7 @@ public class ImageUtil {
 
 
     public static void imageForProducts(Product product, MultipartFile image) throws IOException {
-        String uploadDir = System.getProperty("user.dir") + "/uploads/products";
+        String uploadDir = "/home/avada/web/kino.avada-media-dev1.od.ua/tomcat/webapps/USAINUA_Admin/WEb-INF/classes/uploads/products";
         File uploadDirFile = new File(uploadDir);
         if (!uploadDirFile.exists()) {
             uploadDirFile.mkdirs();
