@@ -22,6 +22,7 @@ public class ImageUtil {
     private final ProductsServiceImpl productsServiceImpl;
 
     public static String imageForShop(Shop shop, MultipartFile image) throws IOException {
+        log.info(shop+"qwerty");
         Path uploadPath = Paths.get("/home/avada/web/kino.avada-media-dev1.od.ua/tomcat/webapps/USAINUA_Admin/WEB-INF/classes/uploads/shops");
         String originalFilename = image.getOriginalFilename();
         String format = originalFilename.substring(originalFilename.lastIndexOf("."));
@@ -30,6 +31,7 @@ public class ImageUtil {
             Files.copy(image.getInputStream(), uploadPath.resolve(nameImage));
             deleteImage(String.valueOf(uploadPath.resolve(shop.getImageName())));
         } catch (Exception e) {
+            log.info(e);
         }
         return nameImage;
     }
@@ -44,6 +46,7 @@ public class ImageUtil {
             deleteImage(String.valueOf(uploadPath.resolve(products.getImageName())));
             products.setImageName(nameImage);
         } catch (Exception e) {
+            log.info(e);
         }
         return nameImage;
     }
