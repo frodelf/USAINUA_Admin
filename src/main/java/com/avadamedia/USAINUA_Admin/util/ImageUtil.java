@@ -2,6 +2,8 @@ package com.avadamedia.USAINUA_Admin.util;
 
 import com.avadamedia.USAINUA_Admin.entity.Product;
 import com.avadamedia.USAINUA_Admin.entity.Shop;
+import com.avadamedia.USAINUA_Admin.services.impl.ProductsServiceImpl;
+import com.avadamedia.USAINUA_Admin.services.impl.ShopsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +18,9 @@ import java.util.Random;
 @Log4j2
 @RequiredArgsConstructor
 public class ImageUtil {
+    private final ShopsServiceImpl shopsServiceImpl;
+    private final ProductsServiceImpl productsServiceImpl;
+
     public static String imageForShop(Shop shop, MultipartFile image) throws IOException {
         Path uploadPath = Paths.get("/home/avada/web/kino.avada-media-dev1.od.ua/tomcat/webapps/USAINUA_Admin/WEB-INF/classes/uploads/shops");
         String originalFilename = image.getOriginalFilename();
@@ -29,7 +34,7 @@ public class ImageUtil {
         return nameImage;
     }
 
-    public static String imageForProducts(Product products, MultipartFile image) throws IOException {
+    public static void imageForProducts(Product products, MultipartFile image) throws IOException {
             Path uploadPath = Paths.get("/home/avada/web/kino.avada-media-dev1.od.ua/tomcat/webapps/USAINUA_Admin/WEB-INF/classes/uploads/products");
             String originalFilename = image.getOriginalFilename();
             String format = originalFilename.substring(originalFilename.lastIndexOf("."));
@@ -40,7 +45,6 @@ public class ImageUtil {
             products.setImageName(nameImage);
         } catch (Exception e) {
         }
-        return nameImage;
     }
 
     public static String generateName() {

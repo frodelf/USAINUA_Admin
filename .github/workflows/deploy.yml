@@ -9,6 +9,7 @@ jobs:
       - name: Build the project
         run: |
           mvn package
+          mvn war:war
       - name: Copy folder
         uses: garygrossgarten/github-action-scp@release
         with:

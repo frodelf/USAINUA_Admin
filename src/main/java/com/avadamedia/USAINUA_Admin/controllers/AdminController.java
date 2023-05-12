@@ -87,7 +87,7 @@ public class AdminController {
     public String shopEditByIdEnd(@PathVariable("id")long id, @RequestParam("link")String link, @RequestParam("image")MultipartFile image) throws IOException {
         Shop shop = shopsServiceImpl.getById(id);
         shop.setLink(link);
-        if(!image.isEmpty()) shop.setImageName(ImageUtil.imageForShop(shop, image));
+        if(!image.isEmpty()) ImageUtil.imageForShop(shop, image);
         shopsServiceImpl.save(shop);
         return "redirect:/admin/shops/";
     }
@@ -102,7 +102,6 @@ public class AdminController {
         model.addAttribute("types", Type.values());
         return "admin/products-add";
     }
-
     @PostMapping("/admin/product/add/")
     public String productAddEnd(@RequestParam("name")String name, @RequestParam("price")String price, @RequestParam("link")String link,
                                 @RequestParam("type")String type, @RequestParam("image")MultipartFile image)  {
@@ -112,7 +111,7 @@ public class AdminController {
         product.setLink(link);
         product.setPrice(Double.parseDouble(price));
         product.setType(type);
-        product.setImageName(ImageUtil.imageForProducts(product, image));
+        ImageUtil.imageForProducts(product, image);
         } catch (RuntimeException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -142,7 +141,7 @@ public class AdminController {
         product.setPrice(Double.parseDouble(price));
         product.setLink(link);
         if(type != null) product.setType(type);
-        if(!image.isEmpty()) product.setImageName(ImageUtil.imageForProducts(product, image));
+        if(!image.isEmpty()) ImageUtil.imageForProducts(product, image);
         productsServiceImpl.save(product);
         return "redirect:/admin/products/";
     }

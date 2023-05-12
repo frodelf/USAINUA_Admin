@@ -13,6 +13,7 @@
 <header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
 
 <div class="content-wrapper" style="min-height: 638.367px;">
+
     <div style="width: 105%">
         <div class="row">
             <div th:each="shop : ${shops}" class="col-lg-4">
@@ -21,7 +22,7 @@
                         <div class="card-body pt-0">
                             <div class="row">
                                 <div class="col-5 text-center">
-                                    <img th:src="@{/home/avada/web/kino.avada-media-dev1.od.ua/logging/USAINUA/uploads/shops/{name}(name=${shop.imageName})}"
+                                    <img th:src="@{{context_path}/shops/{name}(context_path=${context_path}, name=${shop.imageName})}"
                                          class="img-circle" style="width: 100px; height: 100px;">
                                 </div>
                             </div>
