@@ -102,6 +102,7 @@ public class AdminController {
         model.addAttribute("types", Type.values());
         return "admin/products-add";
     }
+
     @PostMapping("/admin/product/add/")
     public String productAddEnd(@RequestParam("name")String name, @RequestParam("price")String price, @RequestParam("link")String link,
                                 @RequestParam("type")String type, @RequestParam("image")MultipartFile image)  {
