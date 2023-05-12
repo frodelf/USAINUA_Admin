@@ -34,7 +34,7 @@ public class ImageUtil {
         return nameImage;
     }
 
-    public static void imageForProducts(Product products, MultipartFile image) throws IOException {
+    public static String imageForProducts(Product products, MultipartFile image) throws IOException {
             Path uploadPath = Paths.get("/home/avada/web/kino.avada-media-dev1.od.ua/tomcat/webapps/USAINUA_Admin/WEB-INF/classes/uploads/products");
             String originalFilename = image.getOriginalFilename();
             String format = originalFilename.substring(originalFilename.lastIndexOf("."));
@@ -45,6 +45,7 @@ public class ImageUtil {
             products.setImageName(nameImage);
         } catch (Exception e) {
         }
+        return nameImage;
     }
 
     public static String generateName() {
