@@ -22,7 +22,7 @@ public class ImageUtil {
     private final ProductsServiceImpl productsServiceImpl;
 
     public static String imageForShop(Shop shop, MultipartFile image) throws IOException {
-        Path uploadPath = Paths.get("/home/avada/web/kino.avada-media-dev1.od.ua/logging/USAINUA/uploads/shops");
+        Path uploadPath = Paths.get("/home/avada/web/kino.avada-media-dev1.od.ua/tomcat/webapps/USAINUA/uploads/shops");
         String originalFilename = image.getOriginalFilename();
         String format = originalFilename.substring(originalFilename.lastIndexOf("."));
         String nameImage = generateName() + format;
@@ -35,7 +35,7 @@ public class ImageUtil {
     }
 
     public static void imageForProducts(Product products, MultipartFile image) throws IOException {
-            Path uploadPath = Paths.get("/home/avada/web/kino.avada-media-dev1.od.ua/logging/USAINUA/uploads/products");
+            Path uploadPath = Paths.get("/home/avada/web/kino.avada-media-dev1.od.ua/tomcat/webapps/USAINUA/uploads/products");
             String originalFilename = image.getOriginalFilename();
             String format = originalFilename.substring(originalFilename.lastIndexOf("."));
             String nameImage = generateName() + format;
