@@ -31,7 +31,7 @@ import java.util.List;
 @Log4j2
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/")
+//@RequestMapping("/")
 public class AdminController {
     private final OrdersRepository ordersRepository;
     private final ProductsRepository productsRepository;
@@ -50,6 +50,10 @@ public class AdminController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         model.addAttribute("username", usersServiceImpl.getByEmail(authentication.getName()).getEmail());
         return "blocks/navbar";
+    }
+    @GetMapping("/")
+    public String swagger(){
+        return "redirect:/admin/";
     }
     @GetMapping("/admin/")
     public String stats(Model model){

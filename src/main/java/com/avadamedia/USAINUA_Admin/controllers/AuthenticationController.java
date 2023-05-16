@@ -19,8 +19,4 @@ public class AuthenticationController {
         log.info("login");
         return "admin/authenticate";
     }
-    @GetMapping("/")
-    public String swagger(Model model) {
-        return "/admin/";
-    }
 }
