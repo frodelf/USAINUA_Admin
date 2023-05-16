@@ -11,7 +11,7 @@
 
 <body>
 <header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
-<div class="content-wrapper" style="min-height: 638.367px;">
+<div class="content-wrapper" style="min-height: 538.367px;">
 
     <div style="width: 105%">
         <div class="row">
@@ -60,6 +60,13 @@
         <button th:onclick="|window.location.href = '@{{context_path}/admin/product/add/(context_path=${context_path})}'|" type="button" class="btn btn-secondary">
             Додати
         </button>
+
+        <br/>
+        <div style="display: inline-block;">
+            <a th:href="@{{context_path}/admin/products/{number}(context_path=${context_path},number=${current-1})}" class="btn btn-secondary" style="display: inline-block; margin-right: 5px; margin-bottom: 20px;">Previous</a>
+            <h1 th:text="${current.toString()}" style="display: inline-block; margin-right: 10px;"></h1>
+            <a th:href="@{{context_path}/admin/products/{number}(context_path=${context_path},number=${current+1})}" class="btn btn-secondary" style="display: inline-block; margin-bottom: 20px;">Next</a>
+        </div>
     </center>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

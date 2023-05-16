@@ -4,11 +4,16 @@ import com.avadamedia.USAINUA_Admin.enums.Status;
 import com.avadamedia.USAINUA_Admin.enums.Transport;
 import com.avadamedia.USAINUA_Admin.enums.Type;
 import com.avadamedia.USAINUA_Admin.entity.*;
+import com.avadamedia.USAINUA_Admin.repositories.AdditionalServicesRepository;
+import com.avadamedia.USAINUA_Admin.repositories.OrdersRepository;
+import com.avadamedia.USAINUA_Admin.repositories.ProductsRepository;
 import com.avadamedia.USAINUA_Admin.services.impl.*;
 import com.avadamedia.USAINUA_Admin.util.ImageUtil;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -28,10 +33,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/")
 public class AdminController {
+    private final OrdersRepository ordersRepository;
+    private final ProductsRepository productsRepository;
     private final ShopsServiceImpl shopsServiceImpl;
     private final ProductsServiceImpl productsServiceImpl;
     private final StorageServiceImpl storageServiceImpl;
     private final AdditionalServicesServiceImpl additionalServicesService;
+    private final AdditionalServicesRepository additionalServicesRepository;
     private final StatsServiceImpl statsServiceImpl;
     private final UsersServiceImpl usersServiceImpl;
     private final NewsServiceImpl newsService;
@@ -91,9 +99,22 @@ public class AdminController {
         shopsServiceImpl.save(shop);
         return "redirect:/admin/shops/";
     }
-    @GetMapping("/admin/products/")
-    public String products(Model model){
-        log.info("products");
+    @GetMapping("/admin/products/{number}")
+    public String products(Model model, @PathVariable("number")int number){
+        model.addAttribute("current", number);
+        if (number < 1) {
+            return "redirect:/admin/products/1";
+        }
+        int max = (int) Math.ceil(productsServiceImpl.getAll().size() / 3.0);
+        max = max==0?1:max;
+        if (number > max) {
+            return "redirect:/admin/products/"+max;
+        }
+        if(!productsServiceImpl.getAll().isEmpty()) {
+            Page<Product> products = productsRepository.findAll(PageRequest.of((number - 1), 3));
+            model.addAttribute("products", products);
+            return "admin/products";
+        }
         model.addAttribute("products", productsServiceImpl.getAll());
         return "admin/products";
     }
@@ -119,12 +140,12 @@ public class AdminController {
         }
         productsServiceImpl.save(product);
 
-        return "redirect:/admin/products/";
+        return "redirect:/admin/products/1";
     }
     @PostMapping("/admin/product/delete/{id}")
     public String deleteById(@PathVariable("id")long id){
         productsServiceImpl.deleteById(id);
-        return "redirect:/admin/products/";
+        return "redirect:/admin/products/1";
     }
     @GetMapping("/admin/product/edit/{id}")
     public String productEditStart(@PathVariable("id")long id, Model model){
@@ -143,10 +164,23 @@ public class AdminController {
         if(type != null) product.setType(type);
         if(!image.isEmpty()) product.setImageName(ImageUtil.imageForProducts(product, image));
         productsServiceImpl.save(product);
-        return "redirect:/admin/products/";
+        return "redirect:/admin/products/1";
     }
-    @GetMapping("/admin/additional-services/")
-    public String additionalServices(Model model){
+    @GetMapping("/admin/additional-services/{number}")
+    public String additionalServices(Model model,@PathVariable("number")int number){
+        model.addAttribute("current", number);
+        if (number < 1) {
+            return "redirect:/admin/additional-services/1";
+        }
+        int max = (int) Math.ceil(additionalServicesService.getAll().size() / 2.0);
+        if (number > max  &&  max >1) {
+            return "redirect:/admin/additional-services/"+(max);
+        }
+        if(!additionalServicesService.getAll().isEmpty()){
+            Page<AdditionalService> additionalServices = additionalServicesRepository.findAll(PageRequest.of((number-1), 2));
+            model.addAttribute("services", additionalServices);
+            return "admin/additional-services";
+        }
         model.addAttribute("services", additionalServicesService.getAll());
         return "admin/additional-services";
     }
@@ -160,7 +194,7 @@ public class AdminController {
         additionalService.setName(name);
         additionalService.setPrice(Double.parseDouble(price));
         additionalServicesService.save(additionalService);
-        return "redirect:/admin/additional-services/";
+        return "redirect:/admin/additional-services/0";
     }
     @GetMapping("/admin/additional-services/edit/{id}")
     public String additionalServicesEditStart(@PathVariable("id")Long id, Model model){
@@ -173,12 +207,12 @@ public class AdminController {
         additionalService.setName(name);
         additionalService.setPrice(Double.parseDouble(price));
         additionalServicesService.save(additionalService);
-        return "redirect:/admin/additional-services/";
+        return "redirect:/admin/additional-services/0";
     }
     @PostMapping("/admin/additional-services/delete/{id}")
     public String additionalServicesDeleteEnd(@PathVariable("id")Long id){
         additionalServicesService.deleteById(id);
-        return "redirect:/admin/additional-services/";
+        return "redirect:/admin/additional-services/0";
     }
     @GetMapping("/admin/storages/")
     public String storage(Model model){
@@ -264,8 +298,22 @@ public class AdminController {
         newsService.deleteById(id);
         return "redirect:/admin/news/";
     }
-    @GetMapping("/admin/orders/")
-    public String getOrders(Model model){
+    @GetMapping("/admin/orders/{number}")
+    public String getOrders(Model model, @PathVariable("number")int number){
+        model.addAttribute("current", number);
+        if(number < 1){
+            return "redirect:/admin/orders/1";
+        }
+        int max = (int) Math.ceil(ordersService.getAll().size() / 2.0);
+        max = max==0?1:max;
+        if(number > max){
+            return "redirect:/admin/orders/"+max;
+        }
+        if(!ordersService.getAll().isEmpty()){
+            Page<Order> orders = ordersRepository.findAll(PageRequest.of((number-1), 2));
+            model.addAttribute("orders", orders);
+            return "admin/orders";
+        }
         model.addAttribute("orders", ordersService.getAll());
         return "admin/orders";
     }
