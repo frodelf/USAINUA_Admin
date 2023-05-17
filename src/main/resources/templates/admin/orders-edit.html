@@ -11,7 +11,7 @@
 
 <body>
 <header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
-<div class="content-wrapper" style="min-height: 638.367px;">
+<div class="content-wrapper" style="min-height: 538.367px;">
 
     <center><h2 th:text="${order_type}"></h2></center>
     <div class="row">
@@ -38,7 +38,7 @@
 
         <div class="col-5 bg-light p-3 border">
             <form method="post"
-                  th:action="@{{context_path}/admin/order/edit/{type}/{id}(context_path=${context_path}, type=${order.isOnlyDelivery()},id=${order.id})}">
+                  th:action="@{{context_path}/admin/orders/edit/{type}/{id}(context_path=${context_path}, type=${order.isOnlyDelivery()},id=${order.id})}">
                 <label style="display: inline-block;">Транспорт:</label>
                 <select class="form-select" aria-label="Default select example" name="transport"
                         style="display: inline-block; width: 40%">

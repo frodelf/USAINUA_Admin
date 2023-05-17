@@ -12,7 +12,7 @@
 
 <body>
 <header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
-<div class="content-wrapper" style="min-height: 638.367px;">
+<div class="content-wrapper" style="min-height: 538.367px;">
 
     <form method="post" th:action="@{{context_path}/admin/news/edit/{id}(context_path=${context_path}, id=${news.id})}">
         Назва <input class="form-control" type="text" th:value="${news.title}" name="name" placeholder="назва"

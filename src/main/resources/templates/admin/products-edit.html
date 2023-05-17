@@ -12,7 +12,7 @@
 <body>
 <header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
 
-<div class="content-wrapper" style="min-height: 638.367px;">
+<div class="content-wrapper" style="min-height: 538.367px;">
 
     <center>
         <form method="post" th:action="@{{context_path}/admin/product/edit/{id}(context_path=${context_path},id=${product.id})}" enctype="multipart/form-data">
@@ -21,14 +21,15 @@
             Ціна <input class="form-control" th:value="${product.price}" type="text" name="price" placeholder="ціна"
                         style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
             Посилання <input class="form-control" th:value="${product.link}" type="text" name="link"
-                             placeholder="Посилання" style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
+                             placeholder="Посилання" style="display: inline-block; margin-top: 35px; width: 40%;">
+            <br/>
             <div class="form-group" style="width: 40%">
                 <label for="type">Type:</label>
                 <select class="form-control" id="type" name="type">
-                    <option th:each="type : ${types}" th:value="${type}" th:text="${type}"></option>
+                    <option th:value="${product.getType()}"  th:selected="true" th:text="${product.getType()}"></option>
+                    <option th:each="type : ${types}" th:value="${type}" th:text="${type}" th:unless="${type.toString() == product.getType()}"></option>
                 </select>
             </div>
-
             <button type="button" class="btn btn-secondary" style="margin-top: 25px">
                 <label for="fileInput" style="cursor: pointer;">
                     <i class="fa fa-file-image-o" aria-hidden="true"></i> Додати фото
@@ -36,7 +37,7 @@
             </button>
             <br/>
             <input id="fileInput" type="file" style="display:none;" name="image">
-            <img id="selectedImage" src="" alt="Вибране зображення"
+            <img id="selectedImage" th:src="@{{context_path}/products/{name}(context_path=${context_path},name=${product.imageName})}"
                  style="width: 150px; height: 90px; margin-top: 15px">
             <br/>
             <script>

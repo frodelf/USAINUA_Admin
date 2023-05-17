@@ -11,7 +11,7 @@
 
 <body>
 <header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
-<div class="content-wrapper" style="min-height: 638.367px;">
+<div class="content-wrapper" style="min-height: 538.367px;">
 
             <div class="row" style="width: 94%; margin-left: 14%">
                 <div class="col-lg-3 col-6">
@@ -23,7 +23,7 @@
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="/admin/product/" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a th:href="@{{context_path}/admin/products/1(context_path=${context_path})}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
@@ -35,7 +35,7 @@
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a href="/admin/shop/" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a th:href="@{{context_path}/admin/shops/(context_path=${context_path})}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
