@@ -20,9 +20,9 @@ public class Product {
     @NotBlank(message = "Поле 'name' не може бути порожнім")
     private String name;
 
-    @NotNull(message = "Поле 'price' не може бути порожнім")
+    @NotNull(message = "Поле 'price' не може бути порожнім і повино містити тільки цифри")
     @Min(value = 0, message = "Ціна не може бути від'ємною")
-    private double price;
+    private Double price;
 
     @NotBlank(message = "Поле тип продукту не може бути порожнім")
     @Pattern(regexp = "^(Clothes|Sport|Gadgets|Another)$", message = "Тип продукту може мати тільки значення: 'Clothes', 'Sport', 'Gadgets', 'Another'")

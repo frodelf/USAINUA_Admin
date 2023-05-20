@@ -156,7 +156,8 @@ public class AdminController {
         Product product = new Product();
         product.setName(name);
         product.setLink(link);
-        product.setPrice(Double.parseDouble(price));
+        if(!price.isEmpty() && price.matches("\\d+(\\.\\d+)?"))
+            product.setPrice(Double.parseDouble(price));
         product.setType(type);
         product.setImageName(ImageUtil.imageForProducts(product, image));
         try {
@@ -188,7 +189,8 @@ public class AdminController {
                                  @RequestParam("image") MultipartFile image, Model model) throws IOException {
         Product product = productsServiceImpl.getById(id);
         product.setName(name);
-        product.setPrice(Double.parseDouble(price));
+        if(!price.isEmpty() && price.matches("\\d+(\\.\\d+)?"))
+            product.setPrice(Double.parseDouble(price));
         product.setLink(link);
         if (type != null) product.setType(type);
         if (!image.isEmpty()) product.setImageName(ImageUtil.imageForProducts(product, image));
@@ -231,14 +233,15 @@ public class AdminController {
     public String additionalServicesEnd(@RequestParam("name") String name, @RequestParam("price") String price, Model model) {
         AdditionalService additionalService = new AdditionalService();
         additionalService.setName(name);
-        additionalService.setPrice(Double.parseDouble(price));
+        if(!price.isEmpty() && price.matches("\\d+(\\.\\d+)?"))
+            additionalService.setPrice(Double.parseDouble(price));
         try {
             additionalServicesService.save(additionalService);
         } catch (Exception e) {
             model.addAttribute("error", e);
             return "admin/validation-error";
         }
-        return "redirect:/admin/additional-services/0";
+        return "redirect:/admin/additional-services/1";
     }
 
     @GetMapping("/admin/additional-services/edit/{id}")
@@ -251,32 +254,33 @@ public class AdminController {
     public String additionalServicesEditEnd(@PathVariable("id") Long id, @RequestParam("name") String name, @RequestParam("price") String price, Model model) {
         AdditionalService additionalService = additionalServicesService.getById(id);
         additionalService.setName(name);
-        additionalService.setPrice(Double.parseDouble(price));
+        if(!price.isEmpty() && price.matches("\\d+(\\.\\d+)?"))
+            additionalService.setPrice(Double.parseDouble(price));
         try {
             additionalServicesService.save(additionalService);
         } catch (Exception e) {
             model.addAttribute("error", e);
             return "admin/validation-error";
         }
-        return "redirect:/admin/additional-services/0";
+        return "redirect:/admin/additional-services/1";
     }
 
     @PostMapping("/admin/additional-services/delete/{id}")
     public String additionalServicesDeleteEnd(@PathVariable("id") Long id) {
         additionalServicesService.deleteById(id);
-        return "redirect:/admin/additional-services/0";
+        return "redirect:/admin/additional-services/1";
     }
 
     @GetMapping("/admin/storage/{number}")
     public String storage(Model model, @PathVariable("number")int number) {
         model.addAttribute("current", number);
         if (number < 1) {
-            return "redirect:/admin/storages/1";
+            return "redirect:/admin/storage/1";
         }
         int max = (int) Math.ceil(storageServiceImpl.getAll().size() / 2.0);
 
         if (number > max && max > 1) {
-            return "redirect:/admin/storages/" + (max);
+            return "redirect:/admin/storage/1" + (max);
         }
         model.addAttribute("max", max);
         if (!storageServiceImpl.getAll().isEmpty()) {
@@ -311,13 +315,13 @@ public class AdminController {
             model.addAttribute("error", e);
             return "admin/validation-error";
         }
-        return "redirect:/admin/storages/";
+        return "redirect:/admin/storage/1";
     }
 
     @PostMapping("/admin/storage/delete/{id}")
     public String storage(@PathVariable("id") Long id) {
         storageServiceImpl.deleteById(id);
-        return "redirect:/admin/storages/";
+        return "redirect:/admin/storage/1";
     }
 
     @GetMapping("/admin/storage/add/")
@@ -342,7 +346,7 @@ public class AdminController {
             model.addAttribute("error", e);
             return "admin/validation-error";
         }
-        return "redirect:/admin/storages/";
+        return "redirect:/admin/storage/1";
     }
 
     @GetMapping("/admin/news/{number}")
@@ -383,7 +387,7 @@ public class AdminController {
             model.addAttribute("error", e);
             return "admin/validation-error";
         }
-        return "redirect:/admin/news/";
+        return "redirect:/admin/news/1";
     }
 
     @GetMapping("/admin/news/edit/{id}")
@@ -404,13 +408,13 @@ public class AdminController {
             model.addAttribute("error", e);
             return "admin/validation-error";
         }
-        return "redirect:/admin/news/";
+        return "redirect:/admin/news/1";
     }
 
     @PostMapping("/admin/news/delete/{id}")
     public String newsDelete(@PathVariable("id") Long id) {
         newsService.deleteById(id);
-        return "redirect:/admin/news/";
+        return "redirect:/admin/news/1";
     }
 
     @GetMapping("/admin/orders/{number}")

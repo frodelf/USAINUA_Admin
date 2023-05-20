@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+    container_name: USAINUA_Admin
+    environment:
+      - DB_HOST=kino.avada-media-dev1.od.ua
+      - DB_PORT=3306
+      - DB_NAME=avada_kino
+      - DB_USER=avada_kino
+      - DB_PASSWORD=OUlIg40qOZ
+    ports:
+      - '8080:8080'

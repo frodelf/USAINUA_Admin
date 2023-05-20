@@ -23,6 +23,6 @@ public class AdditionalService {
     @Pattern(regexp = "^[a-zA-Z0-9а-яА-Я і]+$", message = "Некоректна додаткового сервісу")
     private String name;
     @DecimalMin(value = "0.0", message = "Ціна додаткового сервісу повинна бути більше або дорівнювати нулю")
-    @NotNull(message = "Ціна додаткового сервісу не була вказана")
-    private double price;
+    @NotNull(message = "Ціна додаткового сервісу не була вказана, ціна повина містити тільки цифри")
+    private Double price;
 }
