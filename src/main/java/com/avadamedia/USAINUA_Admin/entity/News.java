@@ -19,13 +19,9 @@ public class News {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @NotBlank(message = "Назва новини не була вказана")
     private String title;
     @Column(name = "text", columnDefinition = "text")
-    @NotBlank(message = "Текст новини не був вказаний")
     private String text;
     @Column(name = "registration_date")
-    @NotNull(message = "Дата випуску новини не була вказана")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 }

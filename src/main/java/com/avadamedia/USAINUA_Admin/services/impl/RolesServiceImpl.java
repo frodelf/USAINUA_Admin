@@ -6,6 +6,8 @@ import com.avadamedia.USAINUA_Admin.services.RolesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RolesServiceImpl implements RolesService {
@@ -14,4 +16,5 @@ public class RolesServiceImpl implements RolesService {
     public Role getById(long id){
         return rolesRepository.findById(id).get();
     }
+    public List<Role> getAll(){return rolesRepository.findAll();}
 }

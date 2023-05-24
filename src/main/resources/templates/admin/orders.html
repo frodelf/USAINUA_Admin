@@ -7,13 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{{context_path}/adminLte/css/adminlte.css(context_path=${context_path})}"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <style>
+        .dataTables_filter {
+            margin-right: 70%;
+        }
+    </style>
 </head>
 
 <body>
 <header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
 <div class="content-wrapper" style="min-height: 538.367px;">
     <center>
-        <table style="width: 90%" class="table table-striped">
+        <table style="width: 90%;" id="newsTable" class="table table-striped">
+            <thead>
             <tr>
                 <td style="width: 20%; border: 2px solid black">
                     id
@@ -31,6 +38,8 @@
 
                 </td>
             </tr>
+            </thead>
+            <tbody>
             <tr th:each="order:${orders}">
                 <td style="width: 20%; border: 2px solid black">
                     <h6 th:text="${order.id}"></h6>
@@ -45,7 +54,7 @@
                     <h6 th:text="${order.dataRegistration}"></h6>
                 </td>
                 <td style="width: 20%">
-                    <form method="get" th:action="@{{context_path}/admin/orders/edit/{id}(context_path=${context_path}, id=${order.id})}"
+                    <form method="get" th:action="@{{context_path}/admin/order/edit/{id}(context_path=${context_path}, id=${order.id})}"
                           style="display: inline-block;">
                         <button type="submit" class="btn btn-secondary" style="margin-left: 20px">
                             <img th:src="@{{context_path}/images/edit.png(context_path=${context_path})}" class="img-fluid" style="width: 20px; height: 20px;">
@@ -53,21 +62,49 @@
                     </form>
                 </td>
             </tr>
+            </tbody>
         </table>
 
-        <br/>
-        <div style="display: inline-block;">
-            <a th:href="@{{context_path}/admin/orders/{number}(context_path=${context_path},number=${current-1})}"
-               th:classappend="${current == 1} ? 'btn btn-secondary disabled' : 'btn btn-secondary'"
-               style="display: inline-block; margin-right: 5px; margin-bottom: 20px;">Previous</a>
-            <h1 th:text="${current.toString()}" style="display: inline-block; margin-right: 10px;"></h1>
-            <a th:href="@{{context_path}/admin/orders/{number}(context_path=${context_path},number=${current+1})}"
-               th:classappend="${current == max} ? 'btn btn-secondary disabled' : 'btn btn-secondary'"
-               style="display: inline-block; margin-bottom: 20px;">Next</a>
-        </div>
+<!--        <br/>-->
+<!--        <div style="display: inline-block;" th:if="${max != 1}">-->
+<!--            <a th:href="@{{context_path}/admin/order/{number}(context_path=${context_path},number=${current-1})}"-->
+<!--               th:classappend="${current == 1} ? 'btn btn-secondary disabled' : 'btn btn-secondary'"-->
+<!--               style="display: inline-block; margin-right: 5px; margin-bottom: 20px;">Previous</a>-->
+<!--            <h1 th:text="${current.toString()}" style="display: inline-block; margin-right: 10px;"></h1>-->
+<!--            <a th:href="@{{context_path}/admin/order/{number}(context_path=${context_path},number=${current+1})}"-->
+<!--               th:classappend="${current == max} ? 'btn btn-secondary disabled' : 'btn btn-secondary'"-->
+<!--               style="display: inline-block; margin-bottom: 20px;">Next</a>-->
+<!--        </div>-->
     </center>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var pageNumber = 6;
+
+        var table = $('#newsTable').DataTable({
+            "pageLength": pageNumber,
+            "lengthChange": false,
+            "info": false,
+            "paging": true
+        });
+
+        var totalRows = table.data().length / pageNumber;
+        $('#totalRows').text(totalRows);
+
+        if (totalRows <= 1) {
+            table.destroy(); // Знищуємо попередню таблицю без пагінації
+            table = $('#newsTable').DataTable({
+                "pageLength": pageNumber,
+                "lengthChange": false,
+                "info": false,
+                "paging": false
+            });
+        }
+    });
+</script>
 </body>
 
 </html>

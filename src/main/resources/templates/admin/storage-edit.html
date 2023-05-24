@@ -13,19 +13,31 @@
 <header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
 <div class="content-wrapper" style="min-height: 538.367px;">
 
-    <form method="post" th:action="@{{context_path}/admin/storage/edit/{id}(context_path=${context_path}, id=${storage.getId()})}">
-        Ім'я <input class="form-control" type="text" name="name" placeholder="ім'я" th:value="${storage.fullName}"
-                    style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-        Вулиця <input class="form-control" type="text" name="street" placeholder="вулиця" th:value="${storage.street}"
-                      style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-        Місто <input class="form-control" type="text" name="city" placeholder="місто" th:value="${storage.city}"
-                     style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-        Штат <input class="form-control" type="text" name="state" placeholder="штат" th:value="${storage.state}"
-                    style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-        Індекс <input class="form-control" type="text" name="index" placeholder="індекс" th:value="${storage.index}"
-                      style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-        Телефон <input class="form-control" type="text" name="phone" placeholder="телефон" th:value="${storage.phone}"
-                       style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
+    <form method="post" th:action="@{{context_path}/admin/storage/edit/{id}(context_path=${context_path}, id=${id})}" th:object="${storage}">
+        Ім'я <input class="form-control" type="text" name="name" placeholder="ім'я" th:value="${storage.fullName}" th:field="*{fullName}"
+                    style="display: inline-block; margin-top: 35px; width: 40%;">
+        <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Name Error</div>
+        <br/>
+        Вулиця <input class="form-control" type="text" name="street" placeholder="вулиця" th:value="${storage.street}" th:field="*{street}"
+                      style="display: inline-block; margin-top: 35px; width: 40%;">
+        <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('street')}" th:errors="*{street}">Name Error</div>
+        <br/>
+        Місто <input class="form-control" type="text" name="city" placeholder="місто" th:value="${storage.city}" th:field="*{city}"
+                     style="display: inline-block; margin-top: 35px; width: 40%;">
+        <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</div>
+        <br/>
+        Штат <input class="form-control" type="text" name="state" placeholder="штат" th:value="${storage.state}" th:field="*{state}"
+                    style="display: inline-block; margin-top: 35px; width: 40%;">
+        <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('state')}" th:errors="*{state}">Name Error</div>
+        <br/>
+        Індекс <input class="form-control" type="text" name="index" placeholder="індекс" th:value="${storage.index}" th:field="*{index}"
+                      style="display: inline-block; margin-top: 35px; width: 40%;">
+        <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('index')}" th:errors="*{index}">Name Error</div>
+        <br/>
+        Телефон <input class="form-control" type="text" name="phone" placeholder="телефон" th:value="${storage.phone}" th:field="*{phone}"
+                       style="display: inline-block; margin-top: 35px; width: 40%;">
+        <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Name Error</div>
+        <br/>
         <center>
             <button type="submit" class="btn btn-secondary" style="margin-top: 25px">
                 <h3>Додати</h3>

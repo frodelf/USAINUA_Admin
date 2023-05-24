@@ -20,12 +20,8 @@ public class Finances {
     @Column(name = "id")
     private Long id;
 
-    @NotNull(message = "Дата оплачення посилки(Finances) не була вказана")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
-    @DecimalMin(value = "0.0", message = "Загальна ціна посилки (Finances) повинна бути більша нуля")
-    @NotNull(message = "Ціна посилки (Finances) не була вказана")
     private double sum;
 
     public Finances(Date date, double sum) {

@@ -23,7 +23,7 @@
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a th:href="@{{context_path}/admin/products/1(context_path=${context_path})}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a th:href="@{{context_path}/admin/product/1(context_path=${context_path})}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
@@ -35,7 +35,7 @@
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a th:href="@{{context_path}/admin/shops/(context_path=${context_path})}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a th:href="@{{context_path}/admin/shop/(context_path=${context_path})}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-6">
@@ -44,6 +44,10 @@
                             <h6 th:text="${users.toString()}"/>
                             <p>Users</p>
                         </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a th:href="@{{context_path}/admin/user/(context_path=${context_path})}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>

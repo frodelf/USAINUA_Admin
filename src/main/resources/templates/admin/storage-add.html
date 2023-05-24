@@ -13,19 +13,31 @@
 <header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
 <div class="content-wrapper" style="min-height: 538.367px;">
 
-    <form method="post" th:action="@{{context_path}/admin/storage/add/(context_path=${context_path})}">
-        Ім'я <input class="form-control" type="text" name="name" placeholder="ім'я"
-                    style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-        Вулиця <input class="form-control" type="text" name="street" placeholder="вулиця"
-                      style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-        Місто <input class="form-control" type="text" name="city" placeholder="місто"
-                     style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-        Штат <input class="form-control" type="text" name="state" placeholder="штат"
-                    style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-        Індекс <input class="form-control" type="text" name="index" placeholder="індекс"
-                      style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-        Телефон <input class="form-control" type="text" name="phone" placeholder="телефон"
-                       style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
+    <form method="post" th:action="@{{context_path}/admin/storage/add/(context_path=${context_path})}" th:object="${storage}">
+        Ім'я <input class="form-control" type="text" name="fullname" placeholder="ім'я" th:field="*{fullName}"
+                    style="display: inline-block; margin-top: 35px; width: 40%;">
+        <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Name Error</div>
+        <br/>
+        Вулиця <input class="form-control" type="text" name="street" placeholder="вулиця" th:field="*{street}"
+                      style="display: inline-block; margin-top: 35px; width: 40%;">
+        <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('street')}" th:errors="*{street}">Name Error</div>
+        <br/>
+        Місто <input class="form-control" type="text" name="city" placeholder="місто" th:field="*{city}"
+                     style="display: inline-block; margin-top: 35px; width: 40%;">
+        <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Name Error</div>
+        <br/>
+        Штат <input class="form-control" type="text" name="state" placeholder="штат" th:field="*{state}"
+                    style="display: inline-block; margin-top: 35px; width: 40%;">
+        <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('state')}" th:errors="*{state}">Name Error</div>
+        <br/>
+        Індекс <input class="form-control" type="text" name="index" placeholder="індекс" th:field="*{index}"
+                      style="display: inline-block; margin-top: 35px; width: 40%;">
+        <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('index')}" th:errors="*{index}">Name Error</div>
+        <br/>
+        Телефон <input class="form-control" type="text" name="phone" placeholder="телефон" th:field="*{phone}"
+                       style="display: inline-block; margin-top: 35px; width: 40%;">
+        <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Name Error</div>
+        <br/>
         <center>
             <button type="submit" class="btn btn-secondary" style="margin-top: 25px">
                 <h3>Додати</h3>

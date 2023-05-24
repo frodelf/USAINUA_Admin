@@ -18,18 +18,12 @@ public class CreditCard {
     private Long id;
 
     @Column(name = "cards_number", length = 16)
-    @NotBlank(message = "Номер кредитної карти не був вказаний")
-    @Pattern(regexp = "^[0-9]+$", message = "Некоректний номер карти, повинен бути формат \"0000111122223333\"")
     private String cardsNumber;
 
     @Column(name = "validity_period", length = 5)
-    @NotBlank(message = "Період дії кредитної карти не був вказаний")
-    @Pattern(regexp = "^[0-9 /]+$", message = "Некоректний період дії карти, повинен бути формат \"00/11\"")
     private String validityPeriod;
 
     @Column(name = "CVV", length = 3)
-    @NotBlank(message = "CVV код не був вказаний")
-    @Pattern(regexp = "^[0-9]+$", message = "Некоректний CVV код карти, повинен бути формат \"123\"")
     private String cvv;
 
     public CreditCard(String cardsNumber, String validityPeriod, String cvv) {

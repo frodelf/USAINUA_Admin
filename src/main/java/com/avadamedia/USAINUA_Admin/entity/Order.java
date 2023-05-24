@@ -5,6 +5,7 @@ import javax.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -47,14 +48,10 @@ public class Order {
     @Min(value = 0, message = "Загальна ціна повинна бути більшою або дорівнювати нулю")
     private Double totalPrice;
 
-    @Positive(message = "Кількість повинна бути більшою за нуль")
     private int number;
     @Column(name = "only_delivery")
-    @NotNull(message = "Поле 'only_delivery' не може бути null")
     private boolean isOnlyDelivery;
     @Column(name = "data_registration")
-    @NotNull(message = "Поле 'data_registration' не може бути null")
-    @PastOrPresent(message = "Дата реєстрації не може бути в майбутньому")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataRegistration;
     @Column(name = "date_receiving")
@@ -63,6 +60,7 @@ public class Order {
 
 
     @ManyToMany
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private List<AdditionalService> additionalServices;
     @ManyToOne
     UsersAddress usersAddresses;

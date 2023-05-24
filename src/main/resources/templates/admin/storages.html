@@ -7,13 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{{context_path}/adminLte/css/adminlte.css(context_path=${context_path})}"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <style>
+        .dataTables_filter {
+            margin-right: 70%;
+            margin-top: -30px;
+        }
+    </style>
 </head>
 
 <body>
 <header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
 <div class="content-wrapper" style="min-height: 538.367px;">
     <center>
-        <table style="width: 90%"  class="table table-striped">
+        <button type="button" class="btn btn-secondary float-right" style="margin-top: 25px; margin-right: 5%;"
+                th:onclick="|window.location.href = '@{{context_path}/admin/storage/add/(context_path=${context_path})}'|">
+            Додати
+        </button>
+        <table style="width: 90%;" id="newsTable" class="table table-striped">
+            <thead>
             <tr>
                 <td style="width: 15%; border: 2px solid black">
                     ФІО
@@ -37,24 +49,26 @@
 
                 </td>
             </tr>
+            </thead>
+            <tbody>
             <tr th:each="storage:${storages}">
                 <td style="width: 15%; border: 2px solid black">
-                    <h6 th:text="${storage.fullName}"></h6>
+                    <h6 th:text="${storage.fullName.length() &gt; 15 ? storage.fullName.substring(0, 15) + '...' : storage.fullName}"></h6>
                 </td>
                 <td style="width: 20%; border: 2px solid black">
-                    <h6 th:text="${storage.street}"></h6>
+                    <h6 th:text="${storage.street.length() &gt; 15 ? storage.street.substring(0, 15) + '...' : storage.street}"></h6>
                 </td>
                 <td style="width: 15%; border: 2px solid black">
-                    <h6 th:text="${storage.city}"></h6>
+                    <h6 th:text="${storage.city.length() &gt; 15 ? storage.city.substring(0, 15) + '...' : storage.city}"></h6>
                 </td>
                 <td style="width: 10%; border: 2px solid black">
-                    <h6 th:text="${storage.state}"></h6>
+                    <h6 th:text="${storage.state.length() &gt; 15 ? storage.state.substring(0, 15) + '...' : storage.state}"></h6>
                 </td>
                 <td style="width: 10%; border: 2px solid black">
-                    <h6 th:text="${storage.index}"></h6>
+                    <h6 th:text="${storage.index.length() &gt; 15 ? storage.index.substring(0, 15) + '...' : storage.index}"></h6>
                 </td>
                 <td style="width: 15%; border: 2px solid black">
-                    <h6 th:text="${storage.phone}"></h6>
+                    <h6 th:text="${storage.phone.length() &gt; 15 ? storage.phone.substring(0, 15) + '...' : storage.phone}"></h6>
                 </td>
                 <td style="width: 30%">
                     <form method="post" th:action="@{{context_path}/admin/storage/delete/{id}(context_path=${context_path}, id=${storage.id})}"
@@ -71,25 +85,37 @@
                     </form>
                 </td>
             </tr>
+            </tbody>
         </table>
-    </center>
-    <center>
-        <button type="button" class="btn btn-secondary" th:onclick="|window.location.href = '@{{context_path}/admin/storage/add/(context_path=${context_path})}'|"
-                style="margin-top: 25px">
-            <h3>Додати</h3>
-        </button>
-        <br/>
-        <div style="display: inline-block;">
-            <a th:href="@{{context_path}/admin/storage/{number}(context_path=${context_path},number=${current-1})}"
-               th:classappend="${current == 1} ? 'btn btn-secondary disabled' : 'btn btn-secondary'"
-               style="display: inline-block; margin-right: 5px; margin-bottom: 20px;">Previous</a>
-            <h1 th:text="${current.toString()}" style="display: inline-block; margin-right: 10px;"></h1>
-            <a th:href="@{{context_path}/admin/storage/{number}(context_path=${context_path},number=${current+1})}"
-               th:classappend="${current == max} ? 'btn btn-secondary disabled' : 'btn btn-secondary'"
-               style="display: inline-block; margin-bottom: 20px;">Next</a>
-        </div>
     </center>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var pageNumber = 6;
+
+        var table = $('#newsTable').DataTable({
+            "pageLength": pageNumber,
+            "lengthChange": false,
+            "info": false,
+            "paging": true
+        });
+
+        var totalRows = table.data().length / pageNumber;
+        $('#totalRows').text(totalRows);
+
+        if (totalRows <= 1) {
+            table.destroy(); // Знищуємо попередню таблицю без пагінації
+            table = $('#newsTable').DataTable({
+                "pageLength": pageNumber,
+                "lengthChange": false,
+                "info": false,
+                "paging": false
+            });
+        }
+    });
+</script>
 </body>
 </html>

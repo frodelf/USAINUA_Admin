@@ -17,24 +17,16 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @NotBlank(message = "Поле 'name' не може бути порожнім")
     private String name;
 
-    @NotNull(message = "Поле 'price' не може бути порожнім і повино містити тільки цифри")
-    @Min(value = 0, message = "Ціна не може бути від'ємною")
     private Double price;
 
-    @NotBlank(message = "Поле тип продукту не може бути порожнім")
-    @Pattern(regexp = "^(Clothes|Sport|Gadgets|Another)$", message = "Тип продукту може мати тільки значення: 'Clothes', 'Sport', 'Gadgets', 'Another'")
     private String type;
 
 
-    @NotBlank(message = "Посилання на продукт не може бути порожнім")
     @Column(unique = true, length = 1000)
-    @URL(message = "Посилання має бути URL-адресою")
     private String link;
 
-    @NotBlank(message = "Фотографія для продукту не може бути порожньою")
     @Column(name = "image_name", unique = true)
     private String imageName;
 }

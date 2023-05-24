@@ -12,12 +12,15 @@
 <body>
 <header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
 <div class="content-wrapper" style="min-height: 538.367px;">
-
-    <form method="post" th:action="@{{context_path}/admin/news/add/(context_path=${context_path})}">
-        Назва <input class="form-control" type="text" name="name" placeholder="назва"
-                     style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-        Опис <textarea class="form-control" name="description" rows="10" cols="50"
-                       style="width: 60%"></textarea><br/>
+    <form method="post" th:action="@{{context_path}/admin/news/add/(context_path=${context_path})}" th:object="${news}">
+        Назва <input class="form-control" type="text" th:field="*{title}" name="name" placeholder="назва"
+                     style="display: inline-block; margin-top: 35px; width: 40%;">
+        <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Name Error</div>
+        <br/>
+        Опис <textarea class="form-control" th:field="*{text}" name="description" rows="10" cols="50"
+                       style="width: 60%"></textarea>
+        <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Name Error</div>
+        <br/>
         <center>
             <button type="submit" class="btn btn-secondary" style="margin-top: 25px">
                 <h3>Додати</h3>

@@ -15,18 +15,19 @@
 <div class="content-wrapper" style="min-height: 538.367px;">
 
     <center>
-        <form method="post" th:action="@{{context_path}/admin/shop/add/(context_path=${context_path})}" enctype="multipart/form-data">
-            Посилання <input class="form-control" type="text" name="link" placeholder="Посилання"
-                             style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-            <button type="button" class="btn btn-secondary">
-                <label for="fileInput" style="cursor: pointer;">
+        <form method="post" th:action="@{{context_path}/admin/shop/add/(context_path=${context_path})}" enctype="multipart/form-data" th:object="${shop}">
+            Посилання <input class="form-control" type="text" th:field="*{link}" name="link" placeholder="Посилання"
+                             style="display: inline-block; margin-top: 35px; width: 40%;">
+            <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('link')}" th:errors="*{link}">Link Error</div>
+            <br/>
+                <label for="fileInput" style="cursor: pointer; margin-top: 10px; margin-bottom: 0px;" class="btn btn-secondary">
                     <i class="fa fa-file-image-o" aria-hidden="true"></i> Додати фото
                 </label>
-            </button>
             <br/>
             <input id="fileInput" type="file" style="display:none;" name="image">
-            <img id="selectedImage" src="" alt="Вибране зображення"
-                 style="width: 150px; height: 90px; margin-top: 15px">
+            <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:text="${error}"><!--th:if="${!error.isEmpty()}"--></div>
+            <img id="selectedImage" th:src="@{{context_path}/images/default.jpg(context_path=${context_path})}" alt="Вибране зображення"
+                 style="width: 150px; height: 90px; margin-top: 15px; margin-bottom: 5px;">
             <br/>
             <script>
                 document.querySelector('#fileInput').addEventListener('change', (event) => {

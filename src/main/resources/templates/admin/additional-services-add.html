@@ -14,11 +14,15 @@
 <header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
 <div class="content-wrapper" style="min-height: 538.367px;">
     <center>
-        <form method="post" th:action="@{{context_path}/admin/additional-services/add/(context_path=${context_path})}">
-            Ім'я <input class="form-control" type="text" name="name" placeholder="і'мя"
-                        style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-            Ціна <input class="form-control" type="text" name="price" placeholder="ціна"
-                        style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
+        <form method="post" th:action="@{{context_path}/admin/additional-service/add/(context_path=${context_path})}" th:object="${service}">
+            Ім'я <input class="form-control" type="text" th:field="*{name}" name="name" placeholder="і'мя"
+                        style="display: inline-block; margin-top: 35px; width: 40%;">
+            <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+            <br/>
+            Ціна <input class="form-control" type="text" th:field="*{price}" name="price" placeholder="ціна"
+                        style="display: inline-block; margin-top: 35px; width: 40%;">
+            <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">PriceError</div>
+            <br/>
             <button type="submit" class="btn btn-secondary" style="margin-top: 25px">
                 Додати
             </button>

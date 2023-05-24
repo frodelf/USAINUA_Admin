@@ -18,9 +18,7 @@ public class Shop {
     @Column(name = "id")
     private Long id;
     @Column(unique = true)
-    @URL(message = "Посилання на магазин має бути URL-адресою")
     private String link;
     @Column(name = "image_name",unique = true)
-    @NotBlank(message = "Фотографія магазину не може бути порожньою")
     private String imageName;
 }

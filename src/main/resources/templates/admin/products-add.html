@@ -14,13 +14,19 @@
 <div class="content-wrapper" style="min-height: 538.367px;">
 
     <center>
-        <form method="post" th:action="@{{context_path}/admin/product/add/(context_path=${context_path})}" enctype="multipart/form-data">
-            Ім'я <input class="form-control" type="text" name="name" placeholder="ім'я"
-                        style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-            Ціна <input class="form-control" type="text" name="price" placeholder="ціна"
-                        style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
-            Посилання <input class="form-control" type="text" name="link" placeholder="Посилання"
-                             style="display: inline-block; margin-top: 35px; width: 40%;"><br/>
+        <form method="post" th:action="@{{context_path}/admin/product/add/(context_path=${context_path})}" enctype="multipart/form-data" th:object="${product}">
+            Ім'я <input class="form-control" type="text" name="name" placeholder="ім'я" th:field="*{name}"
+                        style="display: inline-block; margin-top: 35px; width: 40%;">
+            <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+            <br/>
+            Ціна <input class="form-control" type="text" name="price" placeholder="ціна" th:field="*{price}"
+                        style="display: inline-block; margin-top: 35px; width: 40%;">
+            <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</div>
+            <br/>
+            Посилання <input class="form-control" type="text" name="link" placeholder="Посилання" th:field="*{link}"
+                             style="display: inline-block; margin-top: 35px; width: 40%;">
+            <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('link')}" th:errors="*{link}">Link Error</div>
+            <br/>
             <div class="form-group" style="width: 40%">
                 <label for="type">Type:</label>
                 <select class="form-control" id="type" name="type">
@@ -28,15 +34,14 @@
                 </select>
             </div>
 
-            <button type="button" class="btn btn-secondary" style="margin-top: 25px">
-                <label for="fileInput" style="cursor: pointer;">
+                <label for="fileInput" style="cursor: pointer; margin-top: 10px; margin-bottom: 0px;" class="btn btn-secondary">
                     <i class="fa fa-file-image-o" aria-hidden="true"></i> Додати фото
                 </label>
-            </button>
             <br/>
             <input id="fileInput" type="file" style="display:none;" name="image">
-            <img id="selectedImage" src="" alt="Вибране зображення"
-                 style="width: 150px; height: 90px; margin-top: 15px">
+            <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:text="${error}"><!--th:if="${!error.isEmpty()}"--></div>
+            <img id="selectedImage" th:src="@{{context_path}/images/default.jpg(context_path=${context_path})}" alt="Вибране зображення"
+                 style="width: 150px; height: 90px; margin-top: 15px; margin-bottom: 5px;">
             <br/>
             <script>
                 document.querySelector('#fileInput').addEventListener('change', (event) => {

@@ -20,28 +20,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @NotBlank(message = "Назва користувача не була вказана")
-    @Pattern(regexp = "^[a-zA-Zа-яА-Я і]+$", message = "Некоректне ім'я користувача")
     private String name;
-    @NotBlank(message = "Прізвище користувача не було вказано")
-    @Pattern(regexp = "^[a-zA-Zа-яА-Я і]+$", message = "Некоректне прізвище користувача")
     private String surname;
-    @NotBlank(message = "Пароль користувача не був вказаний")
     private String password;
-    @NotNull(message = "Сума користувача не була вказана")
     private double money;
     @Column(name = "is_man")
-    @NotNull(message = "Стать користувача не була вказана")
     private Boolean isMan;
-    @NotNull(message = "Дата дня народження не була вказана")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
     @Column(unique = true)
-    @Email(message = "Електрона адреса не коректна")
-    @NotBlank(message = "Електроний адрес не був вказаний")
     private String email;
-    @NotBlank(message = "Телефоний номер не був вказаний")
-    @Pattern(regexp = "^[0-9]+$", message = "Некоректний номер телефону")
     private String phone;
     @OneToMany
     List<Order> orders;
