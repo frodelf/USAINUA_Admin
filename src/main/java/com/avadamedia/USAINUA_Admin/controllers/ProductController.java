@@ -67,7 +67,7 @@ public class ProductController {
         Product product = productMapper.toEntity(productDTO);
         product.setImageName(ImageUtil.imageForProducts(product, image));
         productsService.save(product);
-        return "redirect:/admin/product/1";
+        return "redirect:/admin/product/";
     }
 
 
@@ -92,12 +92,12 @@ public class ProductController {
         if(image.isEmpty()) product.setImageName(productsService.getById(id).getImageName());
         else product.setImageName(ImageUtil.imageForProducts(product, image));
         productsService.save(product);
-        return "redirect:/admin/product/1";
+        return "redirect:/admin/product/";
     }
 
     @PostMapping("/delete/{id}")
     public String deleteById(@PathVariable("id") long id) {
         productsService.deleteById(id);
-        return "redirect:/admin/product/1";
+        return "redirect:/admin/product/";
     }
 }

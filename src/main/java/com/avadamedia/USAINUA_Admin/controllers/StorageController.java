@@ -51,7 +51,7 @@ public class StorageController {
     public String storageAddEnd(@ModelAttribute("storage") @Valid StorageDTO storage, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) return "admin/storage-add";
         storageService.save(storageMapper.toEntity(storage));
-        return "redirect:/admin/storage/1";
+        return "redirect:/admin/storage/";
     }
     @GetMapping("/edit/{id}")
     public String storageEditStart(@PathVariable("id") Long id, Model model) {
@@ -67,12 +67,12 @@ public class StorageController {
         Storage storage = storageMapper.toEntity(storageDTO);
         storage.setId(id);
         storageService.save(storage);
-        return "redirect:/admin/storage/1";
+        return "redirect:/admin/storage/";
     }
 
     @PostMapping("/delete/{id}")
     public String storage(@PathVariable("id") Long id) {
         storageService.deleteById(id);
-        return "redirect:/admin/storage/1";
+        return "redirect:/admin/storage/";
     }
 }

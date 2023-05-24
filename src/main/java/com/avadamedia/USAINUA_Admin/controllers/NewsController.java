@@ -55,7 +55,7 @@ public class NewsController {
             return "admin/news-add";
         }
         newsService.save(newsMapper.toEntity(newsDTO));
-        return "redirect:/admin/news/1";
+        return "redirect:/admin/news/";
     }
 
     @GetMapping("/edit/{id}")
@@ -74,12 +74,12 @@ public class NewsController {
         News news = newsMapper.toEntity(newsDTO);
         news.setId(id);
         newsService.save(news);
-        return "redirect:/admin/news/1";
+        return "redirect:/admin/news/";
     }
 
     @PostMapping("/delete/{id}")
     public String newsDelete(@PathVariable("id") Long id) {
         newsService.deleteById(id);
-        return "redirect:/admin/news/1";
+        return "redirect:/admin/news/";
     }
 }

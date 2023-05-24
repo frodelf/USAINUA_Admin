@@ -63,12 +63,12 @@ public class UserController {
         }
         User user = userMapper.toEntity(userDTO);
         usersService.save(user);
-        return "redirect:/admin/user/1";
+        return "redirect:/admin/user/";
     }
 
     @PostMapping("/delete/{id}")
     public String deleteUserById(@PathVariable("id")long id){
         usersService.deleteById(id);
-        return "redirect:/admin/user/1";
+        return "redirect:/admin/user/";
     }
 }

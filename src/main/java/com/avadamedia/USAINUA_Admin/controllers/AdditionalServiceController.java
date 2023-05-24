@@ -56,7 +56,7 @@ public class AdditionalServiceController {
             return "admin/additional-services-add";
         }
         additionalServicesService.save(additionalServiceMapper.toEntity(additionalServiceDTO));
-        return "redirect:/admin/additional-service/1";
+        return "redirect:/admin/additional-service/";
     }
 
 
@@ -77,12 +77,12 @@ public class AdditionalServiceController {
         AdditionalService additionalService = additionalServiceMapper.toEntity(additionalServiceDTO);
         additionalService.setId(id);
         additionalServicesService.save(additionalService);
-        return "redirect:/admin/additional-service/1";
+        return "redirect:/admin/additional-service/";
     }
 
     @PostMapping("/delete/{id}")
     public String additionalServicesDeleteEnd(@PathVariable("id") Long id) {
         additionalServicesService.deleteById(id);
-        return "redirect:/admin/additional-service/1";
+        return "redirect:/admin/additional-service/";
     }
 }

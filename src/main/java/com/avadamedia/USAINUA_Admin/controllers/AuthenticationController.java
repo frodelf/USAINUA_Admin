@@ -23,4 +23,8 @@ public class AuthenticationController {
             return "admin/authenticate";
         }
     }
+    @GetMapping("/")
+    public String admin() {
+        return "redirect:/admin/";
+    }
 }
