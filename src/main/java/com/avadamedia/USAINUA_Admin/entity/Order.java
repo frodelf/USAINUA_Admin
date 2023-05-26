@@ -24,7 +24,7 @@ public class Order {
     private Long id;
 
     @NotBlank(message = "Статус не може бути порожнім")
-    @Pattern(regexp = "^(розрахунок цінності|готово до оплати|оплачено)$", message = "Статус не коректний")
+//    @Pattern(regexp = "^(розрахунок цінності|готово до оплати|оплачено|доставлено|відмінено)$", message = "Статус не коректний")
     private String status;
 
     @NotBlank(message = "Транспортне засіб не може бути порожнім")

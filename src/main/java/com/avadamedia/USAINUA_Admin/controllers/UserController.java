@@ -24,7 +24,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UsersServiceImpl usersService;
-    private final UsersRepository usersRepository;
     private final RolesServiceImpl rolesService;
     private final UserMapper userMapper;
 
@@ -45,10 +44,14 @@ public class UserController {
 //            model.addAttribute("users", userMapper.toDtoList(users.getContent()));
 //            return "admin/user";
 //        }
-        model.addAttribute("users", userMapper.toDtoList(usersService.getAll()));
+        model.addAttribute("users", userMapper.toDtoList(usersService.getOnlyUser()));
         return "admin/user";
     }
-
+    @GetMapping("/admins/")
+    public String admins(Model model){
+        model.addAttribute("admins", userMapper.toDtoList(usersService.getOnlyAdmin()));
+        return "admin/admin";
+    }
     @GetMapping("/edit/{id}")
     public String editUserStart(@PathVariable("id")long id, Model model){
         model.addAttribute("user", userMapper.toDto(usersService.getById(id)));
@@ -57,12 +60,14 @@ public class UserController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editUserEnd(@ModelAttribute("user") @Valid UserDTO userDTO, BindingResult bindingResult){
+    public String editUserEnd(@ModelAttribute("user") @Valid UserDTO userDTO, BindingResult bindingResult, @PathVariable("id")long id){
         if(bindingResult.hasErrors()){
             return "admin/user-edit";
         }
-        User user = userMapper.toEntity(userDTO);
+        User user = userMapper.toEntity(usersService.getById(id),userDTO);
         usersService.save(user);
+        if(user.getRoles().contains(rolesService.getById(1)))return "redirect:/admin/user/admins/";
+
         return "redirect:/admin/user/";
     }
 

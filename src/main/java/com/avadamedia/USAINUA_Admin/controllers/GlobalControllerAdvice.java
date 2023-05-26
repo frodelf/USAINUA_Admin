@@ -23,7 +23,7 @@ public class GlobalControllerAdvice {
     public String getHeader(Model model) {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            model.addAttribute("userLogo", usersService.getByEmail(authentication.getName()).getEmail());
+            model.addAttribute("userLogo", usersService.getByEmail(authentication.getName()).getName());
         }catch (Exception e){
             log.info("Користувач не авторизований");
         }

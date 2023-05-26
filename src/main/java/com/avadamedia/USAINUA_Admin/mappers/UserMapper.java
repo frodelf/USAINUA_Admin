@@ -2,10 +2,13 @@ package com.avadamedia.USAINUA_Admin.mappers;
 
 import com.avadamedia.USAINUA_Admin.entity.User;
 import com.avadamedia.USAINUA_Admin.models.UserDTO;
+import com.avadamedia.USAINUA_Admin.services.impl.UsersServiceImpl;
+import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 public class UserMapper {
     public UserDTO toDto(User user){
         UserDTO userDTO = new UserDTO();
@@ -16,9 +19,7 @@ public class UserMapper {
         userDTO.setRoles(user.getRoles());
         return userDTO;
     }
-    public User toEntity(UserDTO userDTO){
-        User user = new User();
-        user.setId(userDTO.getId());
+    public User toEntity(User user, UserDTO userDTO){
         user.setEmail(userDTO.getEmail());
         user.setPhone(userDTO.getPhone());
         user.setMoney(Double.parseDouble(userDTO.getMoney()));
@@ -31,12 +32,5 @@ public class UserMapper {
             userDTOS.add(toDto(user));
         }
         return userDTOS;
-    }
-    public List<User> toEntityList(List<UserDTO> userDTOS){
-        List<User> users = new ArrayList<>();
-        for (UserDTO userDTO : userDTOS) {
-            users.add(toEntity(userDTO));
-        }
-        return users;
     }
 }

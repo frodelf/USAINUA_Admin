@@ -20,9 +20,9 @@ public class UserDTO {
     @Length(max = 10, message = "Довжина поля повинна бути до 10 символів")
     @Pattern(regexp = "^\\d+(\\.\\d{1,2})?$", message = "Поле повинно містити десяткове число")
     private String money;
-    @NotBlank(message = "Поле повинно бути заповнене")
-    @Length(max = 15, message = "Довжина поля повинна бути до 15 символів")
-    @Pattern(regexp = "^[0-9]+$", message = "Поле повино містити тільки цифри")
+//    @NotBlank(message = "Поле повинно бути заповнене")
+//    @Length(max = 15, message = "Довжина поля повинна бути до 15 символів")
+//    @Pattern(regexp = "^[0-9]+$", message = "Поле повино містити тільки цифри")
     private String phone;
     private List<Role> roles ;
 }

@@ -88,4 +88,12 @@ public class OrderController {
         ordersService.save(order);
         return "redirect:/admin/order/edit/" + id;
     }
+
+    @GetMapping("/edit/status/{id}")
+    public String editOrderStatus(@PathVariable("id")long id){
+        Order order = ordersService.getById(id);
+        order.setStatus(Status.CANCEL.getStatus());
+        ordersService.save(order);
+        return "redirect:/admin/order/";
+    }
 }

@@ -7,8 +7,8 @@ public enum Status {
     CALCULATING_VALUE("розрахунок цінності"),
     READY_FOR_PAYMENT("готово до оплати"),
     PAID("оплачено"),
-    DELIVERED("доставлено");
-
+    DELIVERED("доставлено"),
+    CANCEL("відмінено");
     private String status;
 
     Status(String status) {
