@@ -24,21 +24,7 @@ public class StorageController {
     private final StorageMapper storageMapper;
     @GetMapping("/")
     public String storage(Model model) {
-//        model.addAttribute("current", number);
-//        if (number < 1) {
-//            return "redirect:/admin/storage/1";
-//        }
-//        int max = (int) Math.ceil(storageService.getAll().size() / 5.0);
-//
-//        if (number > max && max > 1) {
-//            return "redirect:/admin/storage/1" + (max);
-//        }
-//        model.addAttribute("max", max);
-//        if (!storageService.getAll().isEmpty()) {
-//            Page<Storage> storages = storageRepository.findAll(PageRequest.of((number - 1), 5));
-//            model.addAttribute("storages", storages);
-//            return "admin/storages";
-//        }
+
         model.addAttribute("storages", storageService.getAll());
         return "admin/storages";
     }

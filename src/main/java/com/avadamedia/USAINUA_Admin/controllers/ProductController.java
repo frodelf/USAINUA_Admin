@@ -29,21 +29,6 @@ public class ProductController {
     private final ProductMapper productMapper;
     @GetMapping("/")
     public String products(Model model) {
-//        model.addAttribute("current", number);
-//        if (number < 1) {
-//            return "redirect:/admin/product/1";
-//        }
-//        int max = (int) Math.ceil(productsService.getAll().size() / 6.0);
-//        max = max == 0 ? 1 : max;
-//        if (number > max) {
-//            return "redirect:/admin/product/" + max;
-//        }
-//        model.addAttribute("max", max);
-//        if (!productsService.getAll().isEmpty()) {
-//            Page<Product> products = productsRepository.findAll(PageRequest.of((number - 1), 6));
-//            model.addAttribute("products", products);
-//            return "admin/products";
-//        }
         model.addAttribute("products", productsService.getAll());
         return "admin/products";
     }

@@ -7,6 +7,7 @@ import com.avadamedia.USAINUA_Admin.enums.Transport;
 import com.avadamedia.USAINUA_Admin.repositories.OrdersRepository;
 import com.avadamedia.USAINUA_Admin.services.impl.AdditionalServicesServiceImpl;
 import com.avadamedia.USAINUA_Admin.services.impl.OrdersServiceImpl;
+import com.avadamedia.USAINUA_Admin.util.CalculatorUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,21 +27,6 @@ public class OrderController {
     private final AdditionalServicesServiceImpl additionalServicesService;
     @GetMapping("/")
     public String getOrders(Model model) {
-//        model.addAttribute("current", number);
-//        if (number < 1) {
-//            return "redirect:/admin/order/1";
-//        }
-//        int max = (int) Math.ceil(ordersService.getAll().size() / 5.0);
-//        max = max == 0 ? 1 : max;
-//        if (number > max) {
-//            return "redirect:/admin/order/" + max;
-//        }
-//        model.addAttribute("max", max);
-//        if (!ordersService.getAll().isEmpty()) {
-//            Page<Order> orders = ordersRepository.findAll(PageRequest.of((number - 1), 5));
-//            model.addAttribute("orders", orders);
-//            return "admin/orders";
-//        }
         model.addAttribute("orders", ordersService.getAll());
         return "admin/orders";
     }
@@ -57,31 +43,17 @@ public class OrderController {
     @PostMapping("/edit/{type}/{id}")
     public String approximatePrice(@PathVariable("type") boolean type, @PathVariable("id") long id, @RequestParam("transport") String transport,
                                    @RequestParam("weight") String weight, @RequestParam("price") String price,
-                                   @RequestParam("services") List<Long> additionalServicesId) {
+                                   @RequestBody List<Long> additionalServicesId) {
         Order order = ordersService.getById(id);
-        additionalServicesId.remove(0);
         List<AdditionalService> additionalServices = new ArrayList<>();
         for (Long aLong : additionalServicesId) {
             additionalServices.add(additionalServicesService.getById(aLong));
         }
-        double totalPrice = 0;
+        double totalPrice;
         if (type) {
-            for (AdditionalService additionalService : additionalServices) {
-                totalPrice += additionalService.getPrice();
-            }
-            if (transport.equals("plane")) totalPrice += 0.5 * Double.valueOf(weight) + 1000;
-            else if (transport.equals("ship")) totalPrice += 0.3 * Double.valueOf(weight) + 500;
-            else totalPrice += 800;
+            totalPrice = CalculatorUtil.deliveryApproximatePrice(Double.parseDouble(weight), additionalServices, transport);
         } else {
-
-            for (AdditionalService additionalService : additionalServices) {
-                totalPrice += additionalService.getPrice();
-            }
-            if (transport.equals("plane"))
-                totalPrice += 0.1 * Double.valueOf(price) + 0.5 * Double.valueOf(weight) + 1000;
-            else if (transport.equals("ship"))
-                totalPrice += 0.05 * Double.valueOf(price) + 0.3 * Double.valueOf(weight) + 500;
-            else totalPrice += 800;
+            totalPrice = CalculatorUtil.purchaseAndDeliveryApproximatePrice(Double.parseDouble(weight), additionalServices, transport , Double.parseDouble(price));
         }
         order.setStatus(Status.READY_FOR_PAYMENT.getStatus());
         order.setTotalPrice(totalPrice);

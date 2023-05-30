@@ -22,25 +22,9 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class AdditionalServiceController {
     private final AdditionalServicesServiceImpl additionalServicesService;
-    private final AdditionalServicesRepository additionalServicesRepository;
     private final AdditionalServiceMapper additionalServiceMapper;
     @GetMapping("/")
     public String additionalServices(Model model) {
-//        model.addAttribute("current", number);
-//        if (number < 1) {
-//            return "redirect:/admin/additional-service/1";
-//        }
-//        int max = (int) Math.ceil(additionalServicesService.getAll().size() / 5.0);
-//
-//        if (number > max && max > 1) {
-//            return "redirect:/admin/additional-service/" + (max);
-//        }
-//        model.addAttribute("max",1);
-//        if (!additionalServicesService.getAll().isEmpty()) {
-//            Page<AdditionalService> additionalServices = additionalServicesRepository.findAll(PageRequest.of((number - 1), 5));
-//            model.addAttribute("services", additionalServices);
-//            return "admin/additional-services";
-//        }
         model.addAttribute("services", additionalServicesService.getAll());
         return "admin/additional-services";
     }

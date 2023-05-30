@@ -25,21 +25,6 @@ public class NewsController {
     private final NewsMapper newsMapper;
     @GetMapping("/")
     public String getNews(Model model) {
-//        model.addAttribute("current", number);
-//        if (number < 1) {
-//            return "redirect:/admin/news/1";
-//        }
-//        int max = (int) Math.ceil(newsService.getAll().size() / 5.0);
-//        max = max == 0 ? 1 : max;
-//        if (number > max) {
-//            return "redirect:/admin/news/" + max;
-//        }
-//        model.addAttribute("max", max);
-//        if (!newsService.getAll().isEmpty()) {
-//            Page<News> news = newsRepository.findAll(PageRequest.of((number - 1), 5));
-//            model.addAttribute("news", news);
-//            return "admin/news";
-//        }
         model.addAttribute("news", newsService.getAll());
         return "admin/news";
     }

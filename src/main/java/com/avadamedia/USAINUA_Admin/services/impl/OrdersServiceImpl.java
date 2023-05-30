@@ -12,7 +12,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrdersServiceImpl implements OrdersService {
     private final OrdersRepository ordersRepository;
-
     public void save(Order order){ordersRepository.save(order);}
     public List<Order> getAll(){return ordersRepository.findAll();}
     public Order getById(long id){return ordersRepository.findById(id).get();}

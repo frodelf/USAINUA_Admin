@@ -29,21 +29,6 @@ public class UserController {
 
     @GetMapping("/")
     public String users(Model model){
-//        model.addAttribute("current", number);
-//        if (number < 1) {
-//            return "redirect:/admin/user/1";
-//        }
-//        int max = (int) Math.ceil(usersService.getAll().size() / 5.0);
-//        max = max == 0 ? 1 : max;
-//        if (number > max) {
-//            return "redirect:/admin/user/" + max;
-//        }
-//        model.addAttribute("max", max);
-//        if (!usersService.getAll().isEmpty()) {
-//            Page<User> users = usersRepository.findAll(PageRequest.of((number - 1), 5));
-//            model.addAttribute("users", userMapper.toDtoList(users.getContent()));
-//            return "admin/user";
-//        }
         model.addAttribute("users", userMapper.toDtoList(usersService.getOnlyUser()));
         return "admin/user";
     }
@@ -58,7 +43,6 @@ public class UserController {
         model.addAttribute("roles",rolesService.getAll());
         return "admin/user-edit";
     }
-
     @PostMapping("/edit/{id}")
     public String editUserEnd(@ModelAttribute("user") @Valid UserDTO userDTO, BindingResult bindingResult, @PathVariable("id")long id){
         if(bindingResult.hasErrors()){
@@ -67,10 +51,8 @@ public class UserController {
         User user = userMapper.toEntity(usersService.getById(id),userDTO);
         usersService.save(user);
         if(user.getRoles().contains(rolesService.getById(1)))return "redirect:/admin/user/admins/";
-
         return "redirect:/admin/user/";
     }
-
     @PostMapping("/delete/{id}")
     public String deleteUserById(@PathVariable("id")long id){
         usersService.deleteById(id);
