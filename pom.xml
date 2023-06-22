@@ -121,12 +121,6 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.2.2</version>
 				<configuration>
-					<webResources>
-						<resource>
-							<directory>${project.basedir}/uploads</directory>
-							<targetPath>WEB-INF/classes/uploads </targetPath>
-						</resource>
-					</webResources>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
