@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("/")
     public String users(Model model){
-        model.addAttribute("users", userMapper.toDtoList(usersService.getOnlyUser()));
+        model.addAttribute("users", userMapper.toDtoList(usersService.getOnlyUserAndBlocked()));
         return "admin/user";
     }
     @GetMapping("/admins/")

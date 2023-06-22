@@ -1,5 +1,6 @@
 package com.avadamedia.USAINUA_Admin.mappers;
 
+import com.avadamedia.USAINUA_Admin.entity.Role;
 import com.avadamedia.USAINUA_Admin.entity.User;
 import com.avadamedia.USAINUA_Admin.models.UserDTO;
 import com.avadamedia.USAINUA_Admin.services.impl.UsersServiceImpl;

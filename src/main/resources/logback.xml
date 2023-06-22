@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>/home/avada/web/kino.avada-media-dev1.od.ua/logging/USAINUA/USAINUA_Admin.log</file>
+        <file>/home/avada/web/slj.avada-media-dev1.od.ua/slj/USAINUA/USAINUA_Admin/USAINUA_Admin.log</file>
         <append>true</append>
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>

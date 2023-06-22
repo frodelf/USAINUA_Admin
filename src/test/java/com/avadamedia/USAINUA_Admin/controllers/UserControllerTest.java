@@ -55,7 +55,7 @@ public class UserControllerTest {
         user1.setMoney(1250.5);
         user1.setPhone("0987656789");
         user1.setRoles(Arrays.asList(new Role(1L, "ROLE_USER")));
-        when(usersService.getOnlyUser()).thenReturn(Arrays.asList(user1));
+        when(usersService.getOnlyUserAndBlocked()).thenReturn(Arrays.asList(user1));
 
         mockMvc.perform(get("/admin/user/"))
                 .andExpect(status().isOk())

@@ -10,19 +10,24 @@ jobs:
         run: |
           mvn package -DskipTests=true
           mvn war:war
+      - name: Update application.yaml
+        run: |
+          sed -i -e 's|${DB_URL}|${{ secrets.DB_URL }}|g' target/USAINUA_RestAPI/WEB-INF/classes/application.yaml
+          sed -i -e 's|${DB_LOGIN}|${{ secrets.DB_LOGIN }}|g' target/USAINUA_RestAPI/WEB-INF/classes/application.yaml
+          sed -i -e 's|${DB_PASSWORD}|${{ secrets.DB_PASSWORD }}|g' target/USAINUA_RestAPI/WEB-INF/classes/application.yaml
       - name: Copy folder
         uses: garygrossgarten/github-action-scp@release
         with:
           local: target/USAINUA_Admin
           remote: tomcat/webapps/USAINUA_Admin
-          host: kino.avada-media-dev1.od.ua
-          username: avada_kino
-          password: "#Es84!4lZ0P7"
+          host: ${{ secrets.SSH_URL }}
+          username: ${{ secrets.SSH_LOGIN }}
+          password: ${{ secrets.SSH_PASSWORD }}
       - name: Copy file
         uses: garygrossgarten/github-action-scp@release
         with:
           local: target/USAINUA_Admin.war
           remote: tomcat/webapps/USAINUA_Admin.war
-          host: kino.avada-media-dev1.od.ua
-          username: avada_kino
-          password: "#Es84!4lZ0P7"
+          host: ${{ secrets.SSH_URL }}
+          username: ${{ secrets.SSH_LOGIN }}
+          password: ${{ secrets.SSH_PASSWORD }}

@@ -1,5 +1,6 @@
 package com.avadamedia.USAINUA_Admin.services.impl;
 
+import com.avadamedia.USAINUA_Admin.entity.Role;
 import com.avadamedia.USAINUA_Admin.entity.User;
 import com.avadamedia.USAINUA_Admin.repositories.RolesRepository;
 import com.avadamedia.USAINUA_Admin.repositories.UsersRepository;
@@ -10,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -24,7 +26,15 @@ public class UsersServiceImpl implements UsersService {
         return usersRepository.findByEmail(email).get();
     }
     public void deleteById(long id){
-        usersRepository.deleteById(id);
+        User user = usersRepository.findById(id).get();
+        if(user.getRoles().contains(rolesRepository.findById(1L).get()) || user.getRoles().contains(rolesRepository.findById(2L).get())){
+//            List<Role> roles = Arrays.asList(rolesRepository.findById(3L).get());
+            ArrayList<Role> roles = new ArrayList<>();
+            roles.add(rolesRepository.findById(3L).get());
+            user.setRoles(roles);
+            usersRepository.save(user);
+        }
+        else if (user.getRoles().contains(rolesRepository.findById(3L).get())) usersRepository.deleteById(id);
     }
     public List<User> getAllMan(){return usersRepository.findByIsManIsTrue();}
     public List<User> getAllWoman(){return usersRepository.findByIsManIsFalse();}
@@ -34,10 +44,11 @@ public class UsersServiceImpl implements UsersService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return usersRepository.findByEmail(authentication.getName()).get();
     }
-    public List<User> getOnlyUser(){
+    public List<User> getOnlyUserAndBlocked(){
         List<User> result = new ArrayList<>();
         for(User user:usersRepository.findAll()){
             if(user.getRoles().contains(rolesRepository.findById(2L).get()))result.add(user);
+            if(user.getRoles().contains(rolesRepository.findById(3L).get()))result.add(user);
         }
         return result;
     }

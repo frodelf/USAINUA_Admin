@@ -56,8 +56,8 @@
                 <td style="width: 20%">
                     <form method="post" th:action="@{{context_path}/admin/user/delete/{id}(context_path=${context_path}, id=${user.id})}"
                           style="display: inline-block;">
-                        <button type="submit" name="action" value="delete" class="btn btn-secondary">
-                            <img th:src="@{{context_path}/images/delete.png(context_path=${context_path})}" class="img-fluid" style="width: 20px; height: 20px;">
+                        <button type="submit" name="action" value="delete" class="btn btn-secondary" th:disabled="${user.getId() == 3}" id="deleteButton">
+                            <img th:src="@{{context_path}/images/delete.png(context_path=${context_path})}" class="img-fluid" style="width: 20px; height: 20px;" >
                         </button>
                     </form>
                     <form method="get" th:action="@{{context_path}/admin/user/edit/{id}(context_path=${context_path}, id=${user.id})}"
@@ -82,6 +82,7 @@
         <!--        </div>-->
     </center>
 </div>
+<script src="/USAINUA_Admin/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>

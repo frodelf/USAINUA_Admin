@@ -21,10 +21,9 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class ImageUtil {
     public static String imageForShop(Shop shop, MultipartFile image) throws IOException {
-        log.info(shop+"qwerty");
         String nameImage ="";
         try {
-            Path uploadPath = Paths.get("/home/avada/web/kino.avada-media-dev1.od.ua/tomcat/webapps/USAINUA_Admin/WEB-INF/classes/uploads/shops");
+            Path uploadPath = Paths.get("/home/avada/web/slj.avada-media-dev1.od.ua/slj/USAINUA/USAINUA_Admin/uploads/shops");
         String originalFilename = image.getOriginalFilename();
         String format = originalFilename.substring(originalFilename.lastIndexOf("."));
         nameImage = generateName() + format;
@@ -39,7 +38,7 @@ public class ImageUtil {
     public static String imageForProducts(Product products, MultipartFile image) throws IOException {
         String nameImage = "";
         try {
-            Path uploadPath = Paths.get("/home/avada/web/kino.avada-media-dev1.od.ua/tomcat/webapps/USAINUA_Admin/WEB-INF/classes/uploads/products");
+            Path uploadPath = Paths.get("/home/avada/web/slj.avada-media-dev1.od.ua/slj/USAINUA/USAINUA_Admin/uploads/products");
             String originalFilename = image.getOriginalFilename();
             String format = originalFilename.substring(originalFilename.lastIndexOf("."));
             nameImage = generateName() + format;
@@ -64,7 +63,6 @@ public class ImageUtil {
     }
 
     public static void deleteImage(String name) {
-        File file = new File(name);
-        file.delete();
+        new File(name).delete();
     }
 }
