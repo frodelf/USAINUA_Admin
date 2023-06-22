@@ -6,10 +6,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class StaticResourceConfiguration implements WebMvcConfigurer {
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/home/avada/web/slj.avada-media-dev1.od.ua/slj/USAINUA/USAINUA_Admin/uploads/**")
-                .addResourceLocations("file:" + System.getProperty("user.dir") + "/uploads/");
+        registry.addResourceHandler("/uploads/**")
+                .addResourceLocations("file:/home/avada/web/slj.avada-media-dev1.od.ua/slj/USAINUA/USAINUA_Admin/uploads/");
     }
 }
+

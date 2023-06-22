@@ -9,7 +9,7 @@ spring:
     show-sql: true
   web:
     resources:
-      static-locations: classpath:/uploads/,classpath:/static/
+      static-locations: classpath:/home/avada/web/slj.avada-media-dev1.od.ua/slj/USAINUA/USAINUA_Admin/uploads/,classpath:/static/
   myapp:
     submit-url: /USAINUA_Admin
 server:
