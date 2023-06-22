@@ -12,9 +12,9 @@ jobs:
           mvn war:war
       - name: Update application.yaml
         run: |
-          sed -i -e 's|${DB_URL}|${{ secrets.DB_URL }}|g' target/USAINUA_RestAPI/WEB-INF/classes/application.yaml
-          sed -i -e 's|${DB_LOGIN}|${{ secrets.DB_LOGIN }}|g' target/USAINUA_RestAPI/WEB-INF/classes/application.yaml
-          sed -i -e 's|${DB_PASSWORD}|${{ secrets.DB_PASSWORD }}|g' target/USAINUA_RestAPI/WEB-INF/classes/application.yaml
+          sed -i -e 's|${DB_URL}|${{ secrets.DB_URL }}|g' target/USAINUA_Admin/WEB-INF/classes/application.yaml
+          sed -i -e 's|${DB_LOGIN}|${{ secrets.DB_LOGIN }}|g' target/USAINUA_Admin/WEB-INF/classes/application.yaml
+          sed -i -e 's|${DB_PASSWORD}|${{ secrets.DB_PASSWORD }}|g' target/USAINUA_Admin/WEB-INF/classes/application.yaml
       - name: Copy folder
         uses: garygrossgarten/github-action-scp@release
         with:
