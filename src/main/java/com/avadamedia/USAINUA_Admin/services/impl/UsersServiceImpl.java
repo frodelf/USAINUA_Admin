@@ -5,9 +5,11 @@ import com.avadamedia.USAINUA_Admin.entity.User;
 import com.avadamedia.USAINUA_Admin.repositories.RolesRepository;
 import com.avadamedia.USAINUA_Admin.repositories.UsersRepository;
 import com.avadamedia.USAINUA_Admin.services.UsersService;
+import com.avadamedia.USAINUA_Admin.util.ImageUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,10 +30,11 @@ public class UsersServiceImpl implements UsersService {
     public void deleteById(long id){
         User user = usersRepository.findById(id).get();
         if(user.getRoles().contains(rolesRepository.findById(1L).get()) || user.getRoles().contains(rolesRepository.findById(2L).get())){
-//            List<Role> roles = Arrays.asList(rolesRepository.findById(3L).get());
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             ArrayList<Role> roles = new ArrayList<>();
             roles.add(rolesRepository.findById(3L).get());
             user.setRoles(roles);
+            user.setPassword(encoder.encode(ImageUtil.generateName()));
             usersRepository.save(user);
         }
         else if (user.getRoles().contains(rolesRepository.findById(3L).get())) usersRepository.deleteById(id);

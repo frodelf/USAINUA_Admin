@@ -73,10 +73,30 @@
                 <td style="width: 30%">
                     <form method="post" th:action="@{{context_path}/admin/storage/delete/{id}(context_path=${context_path}, id=${storage.id})}"
                           style="display: inline-block;">
-                        <button type="submit" name="action" value="delete" class="btn btn-secondary" id="deleteButton">
+                        <button type="button" class="btn btn-secondary"  data-target="#myModal" data-toggle="modal">
                             <img th:src="@{{context_path}/images/delete.png(context_path=${context_path})}" class="img-fluid" style="width: 20px; height: 20px;">
                         </button>
                     </form>
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="myModalLabel">Підтвердіть видалення</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Ви впевнені, що хочете видалити цей елемент?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати
+                                    </button>
+                                    <button type="button" class="btn btn-danger" id="confirmDelete">Видалити</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <form method="get" th:action="@{{context_path}/admin/storage/edit/{id}(context_path=${context_path}, id=${storage.id})}"
                           style="display: inline-block;">
                         <button type="submit" class="btn btn-secondary" style="margin-left: 10px">
@@ -116,6 +136,11 @@
                 "paging": false
             });
         }
+    });
+</script>
+<script>
+    document.getElementById("confirmDelete").addEventListener("click", function () {
+        document.querySelector("form").submit();
     });
 </script>
 </body>

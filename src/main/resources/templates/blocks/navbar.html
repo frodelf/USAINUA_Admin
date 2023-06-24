@@ -139,14 +139,11 @@
         var navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(function(link) {
             if (link.getAttribute('href') === currentUrl) {
-
                 link.classList.add('active');
             }
         });
         links.forEach(function (link) {
             if (link.href.includes('/admin/user/') && currentUrl.includes('/admin/user/')) {
-                console.log(currentUrl);
-                console.log(link.href);
                 if (currentUrl.includes('/admin/user/admins/') || link.href.includes('/admin/user/admins/')) console.log(link.href);
                 else link.classList.add('active');
             }
@@ -179,7 +176,6 @@
                 link.classList.add('active');
             }
 
-            console.log(index)
         });
 
     </script>

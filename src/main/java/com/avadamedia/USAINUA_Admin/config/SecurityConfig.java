@@ -32,6 +32,7 @@ public class SecurityConfig {
                 .authorizeRequests(auth -> {
                     auth.antMatchers("/admin/**").hasRole("ADMIN");
                     auth.antMatchers("/").hasRole("ADMIN");
+                    auth.antMatchers("/**").not().hasRole("DISABLED");
                 })
                 .formLogin(login -> {
                     login.loginPage("/login")
