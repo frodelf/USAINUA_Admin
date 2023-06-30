@@ -28,6 +28,7 @@ public class UsersServiceImpl implements UsersService {
         return usersRepository.findByEmail(email).get();
     }
     public void deleteById(long id){
+        if(id == 3)return;
         User user = usersRepository.findById(id).get();
         if(user.getRoles().contains(rolesRepository.findById(1L).get()) || user.getRoles().contains(rolesRepository.findById(2L).get())){
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
