@@ -76,7 +76,6 @@
                         <button type="button" class="btn btn-secondary"  data-target="#myModal" data-toggle="modal">
                             <img th:src="@{{context_path}/images/delete.png(context_path=${context_path})}" class="img-fluid" style="width: 20px; height: 20px;">
                         </button>
-                    </form>
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -92,11 +91,12 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати
                                     </button>
-                                    <button type="button" class="btn btn-danger" id="confirmDelete">Видалити</button>
+                                    <button type="submit" class="btn btn-danger" id="confirmDelete">Видалити</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </form>
                     <form method="get" th:action="@{{context_path}/admin/storage/edit/{id}(context_path=${context_path}, id=${storage.id})}"
                           style="display: inline-block;">
                         <button type="submit" class="btn btn-secondary" style="margin-left: 10px">
