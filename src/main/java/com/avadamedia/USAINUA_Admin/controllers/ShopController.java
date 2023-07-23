@@ -33,8 +33,10 @@ public class ShopController {
     @PostMapping("/add/")
     public String shopAddEnd(@ModelAttribute("shop") @Valid ShopDTO shop, BindingResult bindingResult, @RequestParam("image")MultipartFile image, Model model) throws IOException {
         if(bindingResult.hasErrors() || image.isEmpty()) {
-            if (image.isEmpty()) {
-                model.addAttribute("error", "Фото повино бути завантажено");
+            String format = "";
+            if(!image.isEmpty())format = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
+            if (image.isEmpty()  ||  (!format.equals(".jpg")  &&  (!format.equals(".jpeg")  && (!format.equals(".png"))))) {
+                model.addAttribute("error", "Фото повино бути завантажено і мати формат jpg, jpeg і png");
             }
             return "admin/shops-add";
         }

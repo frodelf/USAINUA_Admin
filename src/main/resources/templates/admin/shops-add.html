@@ -24,8 +24,8 @@
                     <i class="fa fa-file-image-o" aria-hidden="true"></i> Додати фото
                 </label>
             <br/>
-            <input id="fileInput" type="file" style="display:none;" name="image">
-            <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:text="${error}"><!--th:if="${!error.isEmpty()}"--></div>
+            <input id="fileInput" type="file" style="display:none;" name="image" accept=".jpg, .jpeg, .png">
+            <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:text="${error}"></div>
             <img id="selectedImage" th:src="@{{context_path}/images/default.jpg(context_path=${context_path})}" alt="Вибране зображення"
                  style="width: 150px; height: 90px; margin-top: 15px; margin-bottom: 5px;">
             <br/>

@@ -43,7 +43,9 @@ public class ProductController {
     public String productAddEnd(@ModelAttribute("product") @Valid ProductDTO productDTO, BindingResult bindingResult,
                                 @RequestParam("image") MultipartFile image, Model model) throws IOException {
         if(bindingResult.hasErrors() || image.isEmpty()){
-            if(image.isEmpty()){
+            String format = "";
+            if(!image.isEmpty())format = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
+            if(image.isEmpty()   ||  (!format.equals(".jpg")  &&  (!format.equals(".jpeg")  && (!format.equals(".png"))))){
                 model.addAttribute("error", "Фото повино бути завантажено");
             }
             model.addAttribute("types", Type.values());
