@@ -46,7 +46,7 @@ public class ProductController {
             String format = "";
             if(!image.isEmpty())format = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
             if(image.isEmpty()   ||  (!format.equals(".jpg")  &&  (!format.equals(".jpeg")  && (!format.equals(".png"))))){
-                model.addAttribute("error", "Фото повино бути завантажено");
+                model.addAttribute("error", "Фото повино бути завантажено і мати формат jpg, jpeg і png");
             }
             model.addAttribute("types", Type.values());
             return "admin/products-add";
