@@ -14,4 +14,3 @@ public class StaticResourceConfiguration implements WebMvcConfigurer {
                 .addResourceLocations("file:/home/avada/web/slj.avada-media-dev1.od.ua/projects/USAINUA/uploads/");
     }
 }
-
