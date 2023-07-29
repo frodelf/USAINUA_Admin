@@ -11,7 +11,7 @@ public class StaticResourceConfiguration implements WebMvcConfigurer {
         registry.addResourceHandler("/templates/**")
                 .addResourceLocations("classpath:/templates/");
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:/home/avada/web/slj.avada-media-dev1.od.ua/slj/USAINUA/USAINUA_Admin/uploads/");
+                .addResourceLocations("file:/home/avada/web/slj.avada-media-dev1.od.ua/projects/USAINUA/uploads/");
     }
 }
 
