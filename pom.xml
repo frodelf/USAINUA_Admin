@@ -14,6 +14,8 @@
 	<description>The second project</description>
 	<packaging>jar</packaging>
 	<properties>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 		<java.version>17</java.version>
 		<contextPath>/USAINUA_Admin/</contextPath>
 	</properties>
