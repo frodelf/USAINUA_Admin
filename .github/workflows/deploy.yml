@@ -27,6 +27,7 @@ jobs:
           host: ${{ secrets.SSH_URL }}
           username: ${{ secrets.SSH_LOGIN }}
           password: ${{ secrets.SSH_PASSWORD }}
+          distribution: 'none'
       - name: Copy file
         uses: garygrossgarten/github-action-scp@release
         with:
@@ -35,3 +36,4 @@ jobs:
           host: ${{ secrets.SSH_URL }}
           username: ${{ secrets.SSH_LOGIN }}
           password: ${{ secrets.SSH_PASSWORD }}
+          distribution: 'none'
