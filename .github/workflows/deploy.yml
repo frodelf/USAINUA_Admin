@@ -6,10 +6,6 @@ jobs:
     steps:
       - name: Checkout Git Repo
         uses: actions/checkout@v3
-      - name: Build the project
-        run: |
-          mvn package -DskipTests=true
-          mvn war:war
       - name: Update application.yaml
         run: |
           sed -i -e 's|${DB_URL}|${{ secrets.DB_URL }}|g' target/USAINUA_Admin/WEB-INF/classes/application.yaml
