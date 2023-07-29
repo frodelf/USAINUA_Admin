@@ -3,7 +3,7 @@ package com.avadamedia.USAINUA_Admin.models;
 import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 @Data
 public class ShopDTO {

@@ -1,12 +1,9 @@
 package com.avadamedia.USAINUA_Admin.entity;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 import java.util.List;

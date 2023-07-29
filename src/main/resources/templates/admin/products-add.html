@@ -14,7 +14,7 @@
 <div class="content-wrapper" style="min-height: 538.367px;">
 
     <center>
-        <form method="post" th:action="@{{context_path}/admin/product/add/(context_path=${context_path})}" enctype="multipart/form-data" th:object="${product}">
+        <form method="post" th:action="@{{context_path}/admin/product/add(context_path=${context_path})}" enctype="multipart/form-data" th:object="${product}">
             Ім'я <input class="form-control" type="text" name="name" placeholder="ім'я" th:field="*{name}"
                         style="display: inline-block; margin-top: 35px; width: 40%;">
             <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>

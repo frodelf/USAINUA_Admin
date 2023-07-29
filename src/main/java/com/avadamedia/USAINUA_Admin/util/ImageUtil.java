@@ -2,12 +2,9 @@ package com.avadamedia.USAINUA_Admin.util;
 
 import com.avadamedia.USAINUA_Admin.entity.Product;
 import com.avadamedia.USAINUA_Admin.entity.Shop;
-import com.avadamedia.USAINUA_Admin.services.impl.ProductsServiceImpl;
-import com.avadamedia.USAINUA_Admin.services.impl.ShopsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;

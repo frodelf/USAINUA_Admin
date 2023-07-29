@@ -17,7 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.io.IOException;
 
 @Controller
@@ -42,9 +42,9 @@ public class ProductController {
     @PostMapping("/add")
     public String productAddEnd(@ModelAttribute("product") @Valid ProductDTO productDTO, BindingResult bindingResult,
                                 @RequestParam("image") MultipartFile image, Model model) throws IOException {
-        if(bindingResult.hasErrors() || image.isEmpty()){
-            String format = "";
-            if(!image.isEmpty())format = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
+        String format = "";
+        if(!image.isEmpty())format = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
+        if(bindingResult.hasErrors() || image.isEmpty() || (image.isEmpty()   ||  (!format.equals(".jpg")  &&  (!format.equals(".jpeg")  && (!format.equals(".png")))))){
             if(image.isEmpty()   ||  (!format.equals(".jpg")  &&  (!format.equals(".jpeg")  && (!format.equals(".png"))))){
                 model.addAttribute("error", "Фото повино бути завантажено і мати формат jpg, jpeg і png");
             }
@@ -70,7 +70,10 @@ public class ProductController {
     @PostMapping("/edit/{id}")
     public String productEditEnd(@ModelAttribute("product") @Valid ProductDTO productDTO, BindingResult bindingResult,
                                  @RequestParam("image")MultipartFile image, @PathVariable("id") long id, Model model) throws IOException {
-        if(bindingResult.hasErrors()){
+        String format = "";
+        if(!image.isEmpty())format = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
+        if(bindingResult.hasErrors()  ||  (!format.equals(".jpg")  &&  !format.equals(".jpeg")  && (!format.equals(".png")  &&  (!format.isBlank())))){
+            if(!format.equals(".jpg")  &&  !format.equals(".jpeg")  && (!format.equals(".png")  &&  (!format.isBlank())))model.addAttribute("error", "Фото повино бути завантажено і мати формат jpg, jpeg і png");
             model.addAttribute("types", Type.values());
             return "admin/products-edit";
         }

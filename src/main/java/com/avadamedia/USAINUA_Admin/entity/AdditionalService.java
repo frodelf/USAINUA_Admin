@@ -1,12 +1,10 @@
 package com.avadamedia.USAINUA_Admin.entity;
 
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "additional_services")

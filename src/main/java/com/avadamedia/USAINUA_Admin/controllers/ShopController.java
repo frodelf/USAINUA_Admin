@@ -12,7 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.io.IOException;
 
 @Controller
@@ -32,9 +32,9 @@ public class ShopController {
     }
     @PostMapping("/add/")
     public String shopAddEnd(@ModelAttribute("shop") @Valid ShopDTO shop, BindingResult bindingResult, @RequestParam("image")MultipartFile image, Model model) throws IOException {
-        if(bindingResult.hasErrors() || image.isEmpty()) {
-            String format = "";
-            if(!image.isEmpty())format = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
+        String format = "";
+        if(!image.isEmpty())format = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
+        if(bindingResult.hasErrors() || image.isEmpty() ||  (image.isEmpty()  ||  (!format.equals(".jpg")  &&  (!format.equals(".jpeg")  && (!format.equals(".png")))))){
             if (image.isEmpty()  ||  (!format.equals(".jpg")  &&  (!format.equals(".jpeg")  && (!format.equals(".png"))))) {
                 model.addAttribute("error", "Фото повино бути завантажено і мати формат jpg, jpeg і png");
             }
@@ -56,7 +56,10 @@ public class ShopController {
     @PostMapping("/edit/{id}")
     public String shopEditByIdEnd(@ModelAttribute("shop") @Valid ShopDTO shop, BindingResult bindingResult,
                                   @RequestParam("image")MultipartFile image, @PathVariable("id") long id, Model model) throws IOException {
-        if(bindingResult.hasErrors()) {
+        String format = "";
+        if(!image.isEmpty())format = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
+        if(bindingResult.hasErrors()  ||  (!format.equals(".jpg")  &&  !format.equals(".jpeg")  && (!format.equals(".png")  &&  (!format.isBlank())))) {
+            if(!format.equals(".jpg")  &&  !format.equals(".jpeg")  && (!format.equals(".png")  &&  (!format.isBlank())))model.addAttribute("error", "Фото повино бути завантажено і мати формат jpg, jpeg і png");
             return "admin/shops-edit";
         }
         Shop shop1 = shopMapper.toEntity(shop);

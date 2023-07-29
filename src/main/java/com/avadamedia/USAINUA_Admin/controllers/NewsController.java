@@ -6,6 +6,7 @@ import com.avadamedia.USAINUA_Admin.models.AdditionalServiceDTO;
 import com.avadamedia.USAINUA_Admin.models.NewsDTO;
 import com.avadamedia.USAINUA_Admin.repositories.NewsRepository;
 import com.avadamedia.USAINUA_Admin.services.impl.NewsServiceImpl;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin/news")

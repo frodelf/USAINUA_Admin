@@ -7,14 +7,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  web:
-    resources:
-      static-locations: classpath:/home/avada/web/slj.avada-media-dev1.od.ua/slj/USAINUA/USAINUA_Admin/uploads/,classpath:/static/
-  myapp:
-    submit-url: /USAINUA_Admin
 server:
   servlet:
     context-path: /USAINUA_Admin
+
 #logging:
 #  config: classpath:logback.xml
 
