@@ -20,20 +20,18 @@ jobs:
           sed -i -e 's|${DB_LOGIN}|${{ secrets.DB_LOGIN }}|g' target/USAINUA_Admin/WEB-INF/classes/application.yaml
           sed -i -e 's|${DB_PASSWORD}|${{ secrets.DB_PASSWORD }}|g' target/USAINUA_Admin/WEB-INF/classes/application.yaml
       - name: Copy folder
-        uses: garygrossgarten/github-action-scp@release
+        uses: appleboy/scp-action@master
         with:
-          local: target/USAINUA_Admin
-          remote: tomcat/webapps/USAINUA_Admin
+          source: target/USAINUA_Admin/
+          target: tomcat/webapps/USAINUA_Admin/
           host: ${{ secrets.SSH_URL }}
           username: ${{ secrets.SSH_LOGIN }}
           password: ${{ secrets.SSH_PASSWORD }}
-          distribution: 'none'
       - name: Copy file
-        uses: garygrossgarten/github-action-scp@release
+        uses: appleboy/scp-action@master
         with:
-          local: target/USAINUA_Admin.war
-          remote: tomcat/webapps/USAINUA_Admin.war
+          source: target/USAINUA_Admin.war
+          target: tomcat/webapps/USAINUA_Admin.war
           host: ${{ secrets.SSH_URL }}
           username: ${{ secrets.SSH_LOGIN }}
           password: ${{ secrets.SSH_PASSWORD }}
-          distribution: 'none'
