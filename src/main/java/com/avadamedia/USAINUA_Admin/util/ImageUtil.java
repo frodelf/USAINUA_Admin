@@ -20,7 +20,7 @@ public class ImageUtil {
     public static String imageForShop(Shop shop, MultipartFile image) throws IOException {
         String nameImage ="";
         try {
-            Path uploadPath = Paths.get("/home/avada/web/slj.avada-media-dev1.od.ua/slj/USAINUA/USAINUA_Admin/uploads/shops");
+            Path uploadPath = Paths.get("/home/avada/web/slj.avada-media-dev1.od.ua/projects/USAINUA/uploads/shops");
         String originalFilename = image.getOriginalFilename();
         String format = originalFilename.substring(originalFilename.lastIndexOf("."));
         nameImage = generateName() + format;
@@ -35,7 +35,7 @@ public class ImageUtil {
     public static String imageForProducts(Product products, MultipartFile image) throws IOException {
         String nameImage = "";
         try {
-            Path uploadPath = Paths.get("/home/avada/web/slj.avada-media-dev1.od.ua/slj/USAINUA/USAINUA_Admin/uploads/products");
+            Path uploadPath = Paths.get("/home/avada/web/slj.avada-media-dev1.od.ua/projects/USAINUA/uploads/products");
             String originalFilename = image.getOriginalFilename();
             String format = originalFilename.substring(originalFilename.lastIndexOf("."));
             nameImage = generateName() + format;
