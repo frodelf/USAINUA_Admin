@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${DB_URL}
-    username: ${DB_LOGIN}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://kino.avada-media-dev1.od.ua:3306/avada_slj_uiu
+    username: avada_slj_uiu
+    password: K1NxGqSHEv
   jpa:
     hibernate:
       ddl-auto: update
