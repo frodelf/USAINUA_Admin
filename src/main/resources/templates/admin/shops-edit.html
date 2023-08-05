@@ -26,7 +26,7 @@
             <br/>
             <input id="fileInput" type="file" style="display:none;" name="image" accept=".jpg, .jpeg, .png">
             <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:text="${error}"></div>
-            <img id="selectedImage" th:src="@{{context_path}/shops/{name}(context_path=${context_path},name=${shop.imageName})}" alt="Вибране зображення"
+            <img id="selectedImage" th:src="@{{context_path}/uploads/shops/{name}(context_path=${context_path},name=${shop.imageName})}" alt="Вибране зображення"
                  style="width: 150px; height: 90px; margin-top: 15px">
             <br/>
             <script>

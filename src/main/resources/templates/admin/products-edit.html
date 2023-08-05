@@ -41,7 +41,7 @@
             <br/>
             <input id="fileInput" type="file" style="display:none;" name="image" accept=".jpg, .jpeg, .png">
             <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:text="${error}"></div>
-            <img id="selectedImage" th:src="@{{context_path}/products/{name}(context_path=${context_path},name=${product.imageName})}"
+            <img id="selectedImage" th:src="@{{context_path}/uploads/products/{name}(context_path=${context_path},name=${product.imageName})}"
                  style="width: 150px; height: 90px; margin-top: 15px">
             <br/>
             <script>
