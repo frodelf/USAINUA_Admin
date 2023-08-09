@@ -12,7 +12,7 @@
 <body>
 <header th:insert="blocks/navbar :: header" style="margin-top: 0"></header>
 <div class="content-wrapper" style="min-height: 538.367px;">
-    <form method="post" th:action="@{{context_path}/admin/news/add/(context_path=${context_path})}" th:object="${news}">
+    <form method="post" th:action="@{{context_path}/admin/news/add(context_path=${context_path})}" th:object="${news}">
         Назва <input class="form-control" type="text" th:field="*{title}" name="name" placeholder="назва"
                      style="display: inline-block; margin-top: 35px; width: 40%;">
         <div style="color: red; font-size: small; font-weight: bold; font-style: italic" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Name Error</div>

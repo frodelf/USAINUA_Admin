@@ -22,7 +22,7 @@
     <center>
         <button type="button" class="btn btn-secondary float-right"
                 style="margin-top: 25px; margin-right: 5%; margin-bottom: 10px"
-                th:onclick="|window.location.href = '@{{context_path}/admin/news/add/(context_path=${context_path})}'|">
+                th:onclick="|window.location.href = '@{{context_path}/admin/news/add(context_path=${context_path})}'|">
             Додати
         </button>
         <table style="width: 90%;" id="newsTable" class="table table-striped">
